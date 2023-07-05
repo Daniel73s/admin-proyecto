@@ -24,3 +24,24 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+//animaciones
+@import 'animate.css/animate.css';
+
+
+.custom-modal {
+    /* Establece el ancho del modal */
+    --width: 85%;
+    /* Establece la altura del modal */
+    --height: 90%;
+    /* Opcional: Establece el radio de las esquinas del modal */
+    --border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .custom-modal {
+        /* Establece el ancho del modal */
+        --width: 100%;
+        /* Establece la altura del modal */
+        --height: 100%;
+    }
+}

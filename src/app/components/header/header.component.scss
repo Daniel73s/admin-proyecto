@@ -1,0 +1,15 @@
+.profile{
+    width: 40px; 
+    height: 40px; 
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  ion-popover::part(backdrop) {
+    background-color: transparent;
+  }
+  .btn{cursor: pointer;}
+  .close{color: var(--ion-color-danger);}
+  .nav-shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

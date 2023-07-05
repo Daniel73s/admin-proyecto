@@ -1,0 +1,212 @@
+<app-header></app-header>
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card style="box-shadow: none !important;">
+          <ion-card-header>
+            <ion-card-subtitle>Colegios</ion-card-subtitle>
+            <ion-card-title>Formulario para la creacion de un nuevo colegio</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formAdd">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <h3><ion-badge color="light" mode="md">Informacion general</ion-badge></h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item lines="none">
+                      <ion-input helperText="Numero de Rue" 
+                                 [errorText]="rue_Error"
+                                 maxlength="8" 
+                                 label="Rue *" 
+                                 type="text" 
+                                 formControlName="rue"
+                                 labelPlacement="stacked">
+                      </ion-input>
+                    </ion-item>
+
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item lines="none">
+                      <ion-input label="Nombre *" 
+                                 formControlName="nombre" 
+                                 [errorText]="nombre_Error" 
+                                 labelPlacement="stacked" 
+                                 type="text" 
+                                 maxlength="50"
+                                 helperText="Nombre del colegio">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item>
+                      <ion-select formControlName="dependencia" 
+                                  justify="space-between" 
+                                  labelPlacement="stacked" 
+                                  label="Dependencia *"
+                                  placeholder="Seleccione Dependencia">
+                        <ion-select-option value="fiscal">Fiscal</ion-select-option>
+                        <ion-select-option value="privado">Privado</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item>
+                      <ion-select [multiple]="true" formControlName="niveles" justify="space-between" labelPlacement="stacked" label="Nivel *"
+                        placeholder="Seleccione Niveles">
+                        <ion-select-option value="inicial">Inicial</ion-select-option>
+                        <ion-select-option value="primaria">Primaria</ion-select-option>
+                        <ion-select-option value="secundaria">Secundaria</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    <h3><ion-badge color="light" mode="md">Ubicacion</ion-badge></h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input label="Calle *" 
+                                 [errorText]="calle_Error" 
+                                 labelPlacement="stacked" 
+                                 type="text"
+                                 helperText="Nombre de la calle en la que se encuentra el colegio"
+                                 formControlName="calle"
+                                 >
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input [errorText]="numero_Error" 
+                                 label="Numero" 
+                                 labelPlacement="stacked" 
+                                 type="text"
+                                 formControlName="numero"
+                                 helperText="introducir numero si cuenta con uno">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item>
+                      <ion-select  justify="space-between" 
+                                   labelPlacement="stacked" 
+                                   label="Ciudad *"
+                                   placeholder="Seleccione Ciudad"
+                                   formControlName="ciudad">
+                        <ion-select-option value="Tarija">Tarija</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input [errorText]="zona_Error" 
+                                 label="Zona" 
+                                 labelPlacement="stacked" 
+                                 type="text"
+                                 formControlName="zona"
+                                 helperText="Zona en la que se encuentra el colegio">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item>
+                      <ion-select  justify="space-between" 
+                                   labelPlacement="stacked" 
+                                   label="Area Geografica *"
+                                   placeholder="Area Geografica"
+                                   formControlName="ageografica">
+                        <ion-select-option value="urbana">Urbana</ion-select-option>
+                        <ion-select-option value="rural">Rural</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input label="Coordenadas *" 
+                                 labelPlacement="stacked" 
+                                 type="text"
+                                 formControlName="coordenadas"
+                                 [errorText]="coordenadas_Error"
+                                 helperText="Seleccione ubicacion en el mapa">
+                      </ion-input>
+                      <ion-button color="primary" slot="end" (click)="abrirMapa()">
+                        abrir mapa
+                      </ion-button>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    <h3><ion-badge color="light" mode="md">Contactos</ion-badge></h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input [errorText]="telefono_Error"  
+                                 label="Telefono Fijo" 
+                                 labelPlacement="stacked" 
+                                 [maskito]="telefono" 
+                                 [maskitoElement]="maskPredicate"
+                                 formControlName="telefono"
+                                 helperText="Numero de telefono fijo"
+                                 [counter]="true"
+                                 maxlength="12"
+                                 >
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input [errorText]="celular_Error" 
+                                 label="Numero de Celular" 
+                                 labelPlacement="stacked" 
+                                 [maskito]="celular" 
+                                 [maskitoElement]="maskPredicate"
+                                 formControlName="celular"
+                                 helperText="Numero de celular"
+                                 [counter]="true"
+                                 maxlength="15"
+                                 >
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <ion-item lines="none">
+                      <ion-input [errorText]="email_Error" 
+                                 label="Email" 
+                                 labelPlacement="stacked" 
+                                 helperText="Email del colegio"
+                                 formControlName="email" 
+                                 type="email"
+                                 
+                                 >
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-button [disabled]="formAdd.invalid" color="primary" (click)="guardar()">
+                      guardar
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
