@@ -1,0 +1,23 @@
+ion-card {
+    box-shadow: none !important;
+    position: relative;
+}
+
+.icon-card {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 5rem;
+    color: var(--ion-color-light-shade);
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.echart {
+    width: 50rem;
+    height: 400px;
+    // margin: 0 auto;
+
+}

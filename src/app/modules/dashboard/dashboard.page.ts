@@ -9,50 +9,80 @@ import { MenuItem} from 'src/app/helpers/interfaces/menu.interface';
 export class DashboardPage implements OnInit {
 
 
-  menuItems: MenuItem[] = [
+  // menuItems: MenuItem[] = [
+  //   {
+  //     label: 'Inicio',
+  //     icon: 'home-outline',
+  //     subMenuItems: [],
+  //     subMenuOpened: false,
+  //     url:'/dashboard/inicio'
+  //   },
+  //   {
+  //     label: 'Colegios',
+  //     icon: 'shield-half-outline',
+  //     subMenuItems: [
+  //       { label: 'Listar colegios', icon: 'list-outline',url: '/dashboard/colegios/listar-colegios' },
+  //       { label: 'Crear nuevo colegio', icon: 'add-outline',url: '/dashboard/colegios/crear-colegio' }
+  //     ],
+  //     subMenuOpened: false
+  //   },
+  //   {
+  //     label: 'Proveedores',
+  //     icon: 'people-outline',
+  //     subMenuItems: [
+  //       { label: 'Listar proveedores', icon: 'list-outline',url: '/dashboard/proveedores' },
+  //       { label: 'Crear nuevo proveedor', icon: 'add-outline',url: '/dashboard/crear-proveedor' }
+  //     ],
+  //     subMenuOpened: false
+  //   },
+  //   {
+  //     label: 'Productos',
+  //     icon: 'fast-food-outline',
+  //     subMenuItems: [
+  //       { label: 'Listar productos', icon: 'list-outline',url: '/dashboard/productos' }
+  //     ],
+  //     subMenuOpened: false
+  //   },
+  //   {
+  //     label: 'Pedidos',
+  //     icon: 'document-attach-outline',
+  //     subMenuItems: [
+  //       { label: 'Pedidos pendientes', icon: 'warning-outline',url: '/dashboard/pedidos-pendientes' },
+  //       { label: 'Informe pedidos', icon: 'eye-outline',url: '/dashboard/informe-pedido' }
+  //     ],
+  //     subMenuOpened: false
+  //   }
+  // ];
+
+  menuItems:any[]=[
     {
-      label: 'Inicio',
-      icon: 'home-outline',
-      subMenuItems: [],
-      subMenuOpened: false,
-      url:'/dashboard/inicio'
+      title:'inicio',
+      path:'/dashboard/inicio',
+      icon:'home-outline'
     },
     {
-      label: 'Colegios',
-      icon: 'shield-half-outline',
-      subMenuItems: [
-        { label: 'Listar colegios', icon: 'list-outline',url: '/dashboard/colegios/listar-colegios' },
-        { label: 'Crear nuevo colegio', icon: 'add-outline',url: '/dashboard/colegios/crear-colegio' }
-      ],
-      subMenuOpened: false
+      title:'Colegios',
+      path:'/dashboard/colegios/listar-colegios',
+      icon:'shield-half-outline'
     },
     {
-      label: 'Proveedores',
-      icon: 'people-outline',
-      subMenuItems: [
-        { label: 'Listar proveedores', icon: 'list-outline',url: '/dashboard/proveedores' },
-        { label: 'Crear nuevo proveedor', icon: 'add-outline',url: '/dashboard/crear-proveedor' }
-      ],
-      subMenuOpened: false
+      title:'Proveedores',
+      path:'/dashboard/proveedores',
+      icon:'people-outline'
     },
     {
-      label: 'Productos',
-      icon: 'fast-food-outline',
-      subMenuItems: [
-        { label: 'Listar productos', icon: 'list-outline',url: '/dashboard/productos' }
-      ],
-      subMenuOpened: false
+      title:'Productos',
+      path:'/dashboard/productos',
+      icon:'fast-food-outline'
     },
     {
-      label: 'Pedidos',
-      icon: 'document-attach-outline',
-      subMenuItems: [
-        { label: 'Pedidos pendientes', icon: 'warning-outline',url: '/dashboard/pedidos-pendientes' },
-        { label: 'Informe pedidos', icon: 'eye-outline',url: '/dashboard/informe-pedido' }
-      ],
-      subMenuOpened: false
+      title:'Informes',
+      path:'/dashboard/inicio',
+      icon:'documents-outline'
     }
-  ];
+
+  ]
+
 
   constructor() { }
 

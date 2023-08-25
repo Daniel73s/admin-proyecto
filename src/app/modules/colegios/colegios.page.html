@@ -19,7 +19,7 @@
                     <th>Cliente</th>
                     <th>Estado</th>
                     <th>Direccion</th>
-                    <th>Telefono</th>
+                    <th>Estudiantes</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -29,28 +29,27 @@
                     <td class="content-center">
                       <ion-item class="center" lines="none">
                         <ion-thumbnail slot="start">
-                          <img src="https://pbs.twimg.com/profile_images/1568633176532156418/ZSM3aRwP_400x400.jpg" />
+                          <img src="assets/img/logo-colegio.png" />
                         </ion-thumbnail>
                         <ion-label>
                           <h3>{{'Juan Loes Estrada' |uppercase}}</h3>
-                          <p>juan@gmail.com</p>
+                          <p>(+591) 68691858</p>
                         </ion-label>
                       </ion-item>
                     </td>
                     <td>
-                      <ion-badge color="tertiary" mode="ios">Activo</ion-badge>
+                      <ion-badge style="color:white" color="success" mode="ios">Activo</ion-badge>
                     </td>
                     <td>Barrio miraflores</td>
-                    <td>65412587</td>
+                    <td>326</td>
                     <td class="content-center">
-
-                      <ion-button  color="primary">
+                      <ion-button color="primary" fill="clear" title="Modificar Colegio">
                         <ion-icon slot="icon-only" name="create"></ion-icon>
                       </ion-button>
-                      <ion-button  color="danger">
+                      <ion-button  color="danger" fill="clear" title="Eliminar Colegio">
                         <ion-icon slot="icon-only" name="trash"></ion-icon>
                       </ion-button>
-                      <ion-button  color="secondary">
+                      <ion-button  color="tertiary" fill="clear" title="Ver Colegio">
                         <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                       </ion-button>
                     </td>
@@ -64,3 +63,8 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+<ion-fab  vertical="bottom" horizontal="end">
+  <ion-fab-button color="tertiary" [routerLink]="['/dashboard/colegios/crear-colegio']" >
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

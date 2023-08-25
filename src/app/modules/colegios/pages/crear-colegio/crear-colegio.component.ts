@@ -31,6 +31,7 @@ export class CrearColegioComponent implements OnInit {
     this.formAdd = this.fb.group({
       rue: ['', [Validators.required, Validators.pattern(this.numberRegex), Validators.maxLength(this.Rue_MaxLength), Validators.minLength(this.Rue_MinLength)]],
       nombre: ['', [Validators.required, Validators.maxLength(this.Nombre_MaxLength), Validators.minLength(this.Nombre_MinLength)]],
+      estudiantes: ['', [Validators.required, Validators.pattern(this.numberRegex)]],
       dependencia: ['', Validators.required],
       niveles: ['', Validators.required],
       calle: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
@@ -40,7 +41,7 @@ export class CrearColegioComponent implements OnInit {
       ageografica: ['', Validators.required],
       coordenadas: ['', Validators.required],
       telefono: ['', [Validators.minLength(12)]],
-      celular: ['',[Validators.minLength(15)]],
+      celular: ['', [Validators.minLength(15)]],
       email: ['', [Validators.email, Validators.maxLength(50)]],
     });
   }
@@ -59,8 +60,6 @@ export class CrearColegioComponent implements OnInit {
 
   }
 
-
-
   //Mensajes de error para el campo Rue
   get rue_Error() {
     if (this.formAdd.get('rue')?.hasError('required')) {
@@ -74,6 +73,16 @@ export class CrearColegioComponent implements OnInit {
     }
     if (this.formAdd.get('rue')?.hasError('minlength')) {
       return `El RUE debe tener al menos ${this.Rue_MinLength} numeros`;
+    }
+    return
+  }
+  //mensajes de error para el campo de estudiantes
+  get estudiantes_Error() {
+    if (this.formAdd.get('estudiantes')?.hasError('required')) {
+      return 'Campo debe ser llenado';
+    }
+    if (this.formAdd.get('estudiantes')?.hasError('pattern')) {
+      return 'Solo se aceptan numeros';
     }
     return
   }
@@ -91,7 +100,6 @@ export class CrearColegioComponent implements OnInit {
     }
     return
   }
-
 
   //Mensajes de error para el campo Calle
   get calle_Error() {
@@ -142,22 +150,24 @@ export class CrearColegioComponent implements OnInit {
 
     return
   }
-   //Mensajes de error para el campo Celular
-   get celular_Error() {
+
+  //Mensajes de error para el campo Celular
+  get celular_Error() {
     if (this.formAdd.get('celular')?.hasError('minlength')) {
       return `El campo no cumple como numero de celular`;
     }
     return
   }
-     //Mensajes de error para el campo Celular
-     get email_Error() {
-      if (this.formAdd.get('email')?.hasError('email')) {
-        return `Email invalido`;
-      }
 
-      if (this.formAdd.get('email')?.hasError('maxlength')) {
-        return `Email demaciado largo solo se aceptan 50 caracteres`;
-      }
-      return
+  //Mensajes de error para el campo Celular
+  get email_Error() {
+    if (this.formAdd.get('email')?.hasError('email')) {
+      return `Email invalido`;
     }
+
+    if (this.formAdd.get('email')?.hasError('maxlength')) {
+      return `Email demaciado largo solo se aceptan 50 caracteres`;
+    }
+    return
+  }
 }

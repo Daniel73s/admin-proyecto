@@ -1,5 +1,49 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <h1>pagina de inicio</h1>
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="light">
+      <ion-title>Inicio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4">
+        <ion-card>
+          <ion-icon name="person" class="icon-card"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Administradores</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <h1>2</h1>
+            <!-- <span>Registrados</span> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4">
+        <ion-card>
+          <ion-icon name="shield-half-outline" class="icon-card"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Colegios</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <h1>36</h1>
+            <!-- <span>Registrados</span> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4">
+        <ion-card>
+          <ion-icon name="people-outline" class="icon-card"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Proveedores</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <h1>15</h1>
+            <!-- <span>Registrados</span> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

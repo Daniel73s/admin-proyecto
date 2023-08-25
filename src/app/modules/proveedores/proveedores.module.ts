@@ -8,6 +8,8 @@ import { ProveedoresPageRoutingModule } from './proveedores-routing.module';
 
 import { ProveedoresPage } from './proveedores.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-proveedor-page.component';
+import { MaskitoModule } from '@maskito/angular';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     ProveedoresPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    MaskitoModule
   ],
-  declarations: [ProveedoresPage]
+  declarations: [ProveedoresPage,CrearProveedorPageComponent]
 })
 export class ProveedoresPageModule {}

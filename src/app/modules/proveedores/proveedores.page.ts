@@ -12,4 +12,8 @@ export class ProveedoresPage implements OnInit {
   ngOnInit() {
   }
 
+  public buscar(e:any){
+      console.log(e.target.value);
+      
+  }
 }
