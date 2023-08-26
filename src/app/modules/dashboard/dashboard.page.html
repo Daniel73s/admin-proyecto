@@ -15,24 +15,3 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
-
-<!-- menu desplegable -->
-<!-- 
-            <ion-menu-toggle auto-hide="false" *ngFor="let menuItem of menuItems">
-            <ion-item color="secondary" [routerLink]="menuItem.url"  routerLinkActive="selected" (click)="toggleSubMenu(menuItem)">
-              <ion-icon slot="start" [name]="menuItem.icon"></ion-icon>
-              <ion-label>{{ menuItem.label }}</ion-label>
-              <ion-icon *ngIf="menuItem.subMenuItems && menuItem.subMenuItems.length > 0" slot="end" [name]="getSubMenuIcon(menuItem)"></ion-icon>
-            </ion-item>
-            <ng-container *ngIf="menuItem.subMenuOpened">
-              <ion-item-group>
-                <ion-menu-toggle auto-hide="false" *ngFor="let subMenuItem of menuItem.subMenuItems">
-                  <ion-item color="secondary" [routerLink]="[subMenuItem.url]" lines="none" detail="false" routerLinkActive="selected">
-                    <ion-icon slot="start" [name]="subMenuItem.icon"></ion-icon>
-                    <ion-label>{{ subMenuItem.label }}</ion-label>
-                  </ion-item>
-                </ion-menu-toggle>
-              </ion-item-group>
-            </ng-container>
-          </ion-menu-toggle>
- -->

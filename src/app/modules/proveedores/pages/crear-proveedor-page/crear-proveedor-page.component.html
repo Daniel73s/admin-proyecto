@@ -11,7 +11,7 @@
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <form>
+            <form [formGroup]="formProveedor">
               <ion-grid>
                 <ion-row>
                   <ion-col size="12">
@@ -22,16 +22,16 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item lines="none">
-                      <ion-input helperText="Nombre de la Empresa" label="Empresa *" type="text"
-                        labelPlacement="stacked">
+                      <ion-input helperText="Nombre de la Empresa" label="Razon Social *" type="text"
+                        labelPlacement="stacked" formControlName="razonsocial" [errorText]="razonSocial_Error">
                       </ion-input>
                     </ion-item>
                   </ion-col>
 
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item lines="none">
-                      <ion-input label="Nit" labelPlacement="stacked" type="text" maxlength="10"
-                        helperText="Nit de la Empresa">
+                      <ion-input label="Nit" labelPlacement="stacked" type="number" maxlength="10"
+                        helperText="Nit de la Empresa" formControlName="nit"  [errorText]="nit_Error">
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -40,14 +40,14 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item lines="none">
-                      <ion-input helperText="Limite de entregas por dia" label="Limite*" type="text"
-                        labelPlacement="stacked">
+                      <ion-input helperText="Limite de productos entregados por dia" label="Limite *" type="number"
+                        labelPlacement="stacked" [errorText]="limite_Error" formControlName="limite">
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-select justify="space-between" labelPlacement="stacked" label="Certificado Sanitario *"
+                      <ion-select justify="space-between" formControlName="cs" labelPlacement="stacked" label="Certificado Sanitario *"
                       placeholder="Seleccione el Estado">
                         <ion-select-option value="valido">Valido</ion-select-option>
                         <ion-select-option value="pendiente">Pendiente</ion-select-option>
@@ -64,7 +64,7 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item lines="none">
-                      <ion-input label="Telefono Fijo" labelPlacement="stacked"
+                      <ion-input formControlName="telefono" label="Telefono Fijo" labelPlacement="stacked"
                         [maskito]="telefono" [maskitoElement]="maskPredicate"
                         helperText="Numero de telefono fijo" [counter]="true" maxlength="12">
                       </ion-input>
@@ -72,9 +72,9 @@
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item lines="none">
-                      <ion-input label="Numero de Celular" labelPlacement="stacked"
+                      <ion-input formControlName="celular" label="Numero de Celular *" labelPlacement="stacked"
                         [maskito]="celular" [maskitoElement]="maskPredicate"
-                        helperText="Numero de celular" [counter]="true" maxlength="15">
+                        helperText="Numero de celular" [errorText]="celular_Error" [counter]="true" maxlength="15">
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -88,21 +88,21 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
                     <ion-item lines="none">
-                      <ion-input label="Zona" labelPlacement="stacked" type="text" maxlength="150"
-                        helperText="Zona en la que se encuentra el proveedor">
+                      <ion-input formControlName="zona" label="Zona *" labelPlacement="stacked" type="text" maxlength="150"
+                        helperText="Zona en la que se encuentra el proveedor" [errorText]="zona_Error">
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
                     <ion-item lines="none">
-                      <ion-input label="Calle" labelPlacement="stacked" type="text" maxlength="150"
+                      <ion-input formControlName="calle" label="Calle" labelPlacement="stacked" type="text" maxlength="150"
                         helperText="Calle de referencia">
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
                     <ion-item lines="none">
-                      <ion-input label="Numero de domicilio" labelPlacement="stacked" type="text" maxlength="50"
+                      <ion-input formControlName="numerodomicilio" label="Numero de domicilio" labelPlacement="stacked" type="text" maxlength="50"
                         helperText="Numero de domicilio si cuenta con uno">
                       </ion-input>
                     </ion-item>
@@ -111,7 +111,7 @@
                 <!-- boton del formulario  -->
                 <ion-row>
                   <ion-col size="12">
-                    <ion-button color="primary">
+                    <ion-button color="primary" (click)="save()" [disabled]="formProveedor.invalid">
                       guardar
                     </ion-button>
                   </ion-col>
