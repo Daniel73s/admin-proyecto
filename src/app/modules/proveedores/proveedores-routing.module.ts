@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProveedoresPage } from './proveedores.page';
 import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-proveedor-page.component';
+import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'crear-proveedor',
     component: CrearProveedorPageComponent
+  },
+  {
+    path: 'modificar-proveedor',
+    component: ModificarProveedorPageComponent
   }
 
 ];

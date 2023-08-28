@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ColegiosPage } from './colegios.page';
 import { CrearColegioComponent } from './pages/crear-colegio/crear-colegio.component';
+import { ModificarColegioPageComponent } from './pages/modificar-colegio-page/modificar-colegio-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path:'crear-colegio',
     component:CrearColegioComponent
+  },
+  
+  {
+    path:'modificar-colegio',
+    component:ModificarColegioPageComponent
   },
   {
     path:'listar-colegios',

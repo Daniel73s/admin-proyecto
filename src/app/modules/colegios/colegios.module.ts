@@ -9,7 +9,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ColegiosPage } from './colegios.page';
 import { CrearColegioComponent } from './pages/crear-colegio/crear-colegio.component';
 import { MapaModalComponent } from './modals/mapa-modal/mapa-modal.component';
-import { ActualizarColegioComponent } from './pages/actualizar-colegio/actualizar-colegio.component';
+import { ModificarColegioPageComponent } from './pages/modificar-colegio-page/modificar-colegio-page.component';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { ActualizarColegioComponent } from './pages/actualizar-colegio/actualiza
     MaskitoModule,
     ReactiveFormsModule
   ],
-  declarations: [ColegiosPage,CrearColegioComponent,MapaModalComponent, ActualizarColegioComponent]
+  declarations: [ColegiosPage,CrearColegioComponent,MapaModalComponent,ModificarColegioPageComponent]
 })
 export class ColegiosPageModule {}

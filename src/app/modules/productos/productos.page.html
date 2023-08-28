@@ -17,9 +17,9 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Producto</th>
-                    <th>Unidades</th>
-                    <th>Descripcion</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>P.U</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -38,17 +38,16 @@
                       </ion-item>
                     </td>
                     <td>1200 Uni.</td>
-                    <td>Platano traido desde el tropico</td>
+                    <td>2 Bs</td>
                     <td>
                       <ion-badge color="success" style="color:white;" mode="ios">activo</ion-badge>
                     </td>
                     <td class="content-center">
 
-                      <ion-button  color="primary" fill="clear">
+                      <ion-button  color="primary" fill="clear" title="Modificar Producto" routerLink="/dashboard/productos/modificar-producto">
                         <ion-icon slot="icon-only" name="create"></ion-icon>
-                        <!-- <ion-tooltip>Tooltip de ejemplo</ion-tooltip> -->
                       </ion-button>
-                      <ion-button  color="danger" fill="clear">
+                      <ion-button (click)="presentAlertConfirm()"  color="danger" fill="clear">
                         <ion-icon slot="icon-only" name="trash"></ion-icon>
                       </ion-button>
                       <ion-button  color="tertiary" fill="clear">

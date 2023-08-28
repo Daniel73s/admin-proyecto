@@ -1,0 +1,96 @@
+<app-header></app-header>
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card style="box-shadow: none !important;">
+          <ion-card-header>
+            <ion-card-title>
+              Formulario para la modificacion del producto
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formmodProducto">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="8" size-lg="8">
+                    <ion-row>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+                        <ion-item lines="none">
+                          <ion-input [counter]="true" helperText="Nombre del producto" label="Nombre *" type="text"
+                            labelPlacement="stacked" maxlength="50" formControlName="nombre" [errorText]="Error('nombre')">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+                        <ion-item lines="none">
+                          <ion-input label="Cantidad *" labelPlacement="stacked" type="number" maxlength="5"
+                            helperText="Cantidad de producto (mayor a 100)" formControlName="cantidad" [errorText]="Error('cantidad')">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+                        <ion-item lines="none">
+                          <ion-input helperText="Precio unitario de producto (1 - 2) Bs" label="Precio Unitario *" type="number"
+                            labelPlacement="stacked" [errorText]="Error('precioUnitario')" formControlName="precioUnitario">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+                        <ion-item>
+                          <ion-select formControlName="tipo" justify="space-between" labelPlacement="stacked" label="Tipo *"
+                            placeholder="Seleccione el tipo del producto">
+                            <ion-select-option value="liquido">Liquido</ion-select-option>
+                            <ion-select-option value="solido">Solido</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                        <ion-item lines="none">
+                          <ion-textarea [errorText]="Error('detalle')" formControlName="detalle" helperText="Detalles acerca del producto" [counter]="true" maxlength="250" rows="2" label="Detalle *" type="text" labelPlacement="stacked"></ion-textarea>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                        <ion-item lines="none">
+                          <ion-textarea [errorText]="Error('ingredientes')" formControlName="ingredientes" helperText="Ingredientes del producto" [counter]="true" maxlength="250" rows="3" label="Ingredientes" type="text" labelPlacement="stacked"></ion-textarea>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                        <ion-item lines="none">
+                          <ion-textarea [errorText]="Error('comentariosAdicionales')" formControlName="comentariosAdicionales" [counter]="true" maxlength="250" rows="3" label="Comentarios Adicionales" type="text" labelPlacement="stacked"></ion-textarea>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                    <div class="image-box">
+                      <img [src]="selectedImage" alt="Selected Image" />
+                      <label class="custom-file-input">
+                        Seleccionar Imagen
+                        <input type="file" (change)="handleFileChange($event)" />
+                      </label>
+                    </div>
+                  </ion-col>
+                  
+                </ion-row>
+
+                <!-- boton del formulario  -->
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-button color="primary" (click)="update()" [disabled]="formmodProducto.invalid">
+                      Salvar cambios
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

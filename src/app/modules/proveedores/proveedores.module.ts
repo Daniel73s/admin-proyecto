@@ -10,6 +10,7 @@ import { ProveedoresPage } from './proveedores.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-proveedor-page.component';
 import { MaskitoModule } from '@maskito/angular';
+import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { MaskitoModule } from '@maskito/angular';
     MaskitoModule,
     ReactiveFormsModule
   ],
-  declarations: [ProveedoresPage,CrearProveedorPageComponent]
+  declarations: [ProveedoresPage,CrearProveedorPageComponent,ModificarProveedorPageComponent]
 })
 export class ProveedoresPageModule {}

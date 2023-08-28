@@ -43,10 +43,10 @@
                     <td>Barrio miraflores</td>
                     <td>326</td>
                     <td class="content-center">
-                      <ion-button color="primary" fill="clear" title="Modificar Colegio">
+                      <ion-button color="primary" routerLink="/dashboard/colegios/modificar-colegio" fill="clear" title="Modificar Colegio">
                         <ion-icon slot="icon-only" name="create"></ion-icon>
                       </ion-button>
-                      <ion-button  color="danger" fill="clear" title="Eliminar Colegio">
+                      <ion-button (click)="presentAlertConfirm()" color="danger" fill="clear" title="Eliminar Colegio">
                         <ion-icon slot="icon-only" name="trash"></ion-icon>
                       </ion-button>
                       <ion-button  color="tertiary" fill="clear" title="Ver Colegio">
