@@ -1,0 +1,33 @@
+.content {
+    display: flex;
+    // flex-direction: column;
+    // align-items: end;
+    justify-content: flex-end;
+}
+
+.imagen {
+    --size: 300px;
+    --border-radius: 14px;
+    object-fit: cover;
+    padding: 15px;
+}
+.items-content{
+    display: flex;
+    gap:1rem;
+    ion-item{
+        --background:var(--ion-color-light);
+    }
+}
+.detalle-content{
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+}
+
+@media (max-width: 770px) {
+    .content {
+        justify-content: center;
+    }
+    .imagen {
+        --size:400px;
+    }
+  }

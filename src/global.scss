@@ -28,8 +28,15 @@
 @import 'animate.css/animate.css';
 
 
-
-
+// lato
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,400&display=swap');
+// *{
+//     font-family: 'Lato', sans-serif;
+// }
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+}
 .custom-modal {
     /* Establece el ancho del modal */
     --width: 85%;

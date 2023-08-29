@@ -9,6 +9,7 @@ import { ProductosPageRoutingModule } from './productos-routing.module';
 import { ProductosPage } from './productos.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ModificarProductoPageComponent } from './pages/modificar-producto-page/modificar-producto-page.component';
+import { DetalleProductoPageComponent } from './pages/detalle-producto-page/detalle-producto-page.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ModificarProductoPageComponent } from './pages/modificar-producto-page/
     ComponentsModule,
     ReactiveFormsModule
   ],
-  declarations: [ProductosPage,ModificarProductoPageComponent]
+  declarations: [ProductosPage,ModificarProductoPageComponent,DetalleProductoPageComponent]
 })
 export class ProductosPageModule {}
