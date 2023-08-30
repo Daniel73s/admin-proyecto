@@ -1,33 +1,70 @@
-.content {
+.image-box {
     display: flex;
-    // flex-direction: column;
-    // align-items: end;
-    justify-content: flex-end;
-}
-
-.imagen {
-    --size: 300px;
-    --border-radius: 14px;
-    object-fit: cover;
-    padding: 15px;
-}
-.items-content{
-    display: flex;
-    gap:1rem;
-    ion-item{
-        --background:var(--ion-color-light);
-    }
-}
-.detalle-content{
-    width: 100%;
-    padding: 0px 10px 0px 10px;
-}
-
-@media (max-width: 770px) {
-    .content {
-        justify-content: center;
-    }
-    .imagen {
-        --size:400px;
-    }
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
   }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+  }
+  
+  .custom-file-input {
+    display: inline-block;
+    background-color: none;
+    color: #4169E1;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-file-input input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-input:hover {
+    background-color: #e9eef5;
+  }
+  
+  
+
+
+// estilo para mostrar en la aplicacion 
+// .content {
+//     display: flex;
+//     justify-content: flex-end;
+// }
+
+// .imagen {
+//     --size: 300px;
+//     --border-radius: 14px;
+//     object-fit: cover;
+//     padding: 15px;
+// }
+// .items-content{
+//     display: flex;
+//     gap:1rem;
+//     ion-item{
+//         --background:var(--ion-color-light);
+//     }
+// }
+// .detalle-content{
+//     width: 100%;
+//     padding: 0px 10px 0px 10px;
+// }
+
+// @media (max-width: 770px) {
+//     .content {
+//         justify-content: center;
+//     }
+//     .imagen {
+//         --size:400px;
+//     }
+//   }

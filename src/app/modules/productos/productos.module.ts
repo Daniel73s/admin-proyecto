@@ -10,7 +10,8 @@ import { ProductosPage } from './productos.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ModificarProductoPageComponent } from './pages/modificar-producto-page/modificar-producto-page.component';
 import { DetalleProductoPageComponent } from './pages/detalle-producto-page/detalle-producto-page.component';
-
+import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,9 @@ import { DetalleProductoPageComponent } from './pages/detalle-producto-page/deta
     IonicModule,
     ProductosPageRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule,
+    HttpClientModule
   ],
   declarations: [ProductosPage,ModificarProductoPageComponent,DetalleProductoPageComponent]
 })

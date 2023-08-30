@@ -1,0 +1,136 @@
+{
+    "productos": [
+        {
+            "id": "id-1",
+            "nombre": "karpil",
+            "tipo": "liquido",
+            "estado": "activo",
+            "precioUnitario": "1",
+            "detalle": "Bebida lactea",
+            "imagen": "https://piltarija.com/wp-content/uploads/2016/11/06.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-2",
+            "nombre": "jugo de frutas",
+            "tipo": "liquido",
+            "estado": "activo",
+            "precioUnitario": "2",
+            "detalle": "Bebida a base de frutas",
+            "imagen": "https://s1.1zoom.me/big0/912/Juice_Fruit_Highball_glass_Three_3_545274_1280x920.jpg",
+            "ingredientes": "\n      1 taza de yogurt natural o de vainilla\n      ½ taza de jugo de naranja\n      Jugo de un limón\n      5 moras lavadas (se puede remplazar por fresas)\n      1 cucharada de jengibre fresco, pelado y cortado en trozos\n      ½ taza de miel y 5 cubos de hielo",
+            "comentariosAdicionales": "No exponer al sol por mucho tiempo"
+        },
+        {
+            "id": "id-3",
+            "nombre": "manzana",
+            "tipo": "solido",
+            "estado": "activo",
+            "precioUnitario": "1.99",
+            "detalle": "Una deliciosa manzana fresca.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-4",
+            "nombre": "agua mineral",
+            "tipo": "liquido",
+            "estado": "activo",
+            "precioUnitario": "0.99",
+            "detalle": "Botella de agua mineral natural.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-5",
+            "nombre": "pan integral",
+            "tipo": "solido",
+            "estado": "inactivo",
+            "precioUnitario": "2.49",
+            "detalle": "Pan integral recién horneado.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-6",
+            "nombre": "yogurt natural",
+            "tipo": "liquido",
+            "estado": "activo",
+            "precioUnitario": "1.79",
+            "detalle": "Yogur natural sin azúcar.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-7",
+            "nombre": "cafe molido",
+            "tipo": "solido",
+            "estado": "activo",
+            "precioUnitario": "7.99",
+            "detalle": "Café molido de origen colombiano.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-8",
+            "nombre": "jugo de naranja",
+            "tipo": "liquido",
+            "estado": "activo",
+            "precioUnitario": "2.29",
+            "detalle": "Jugo de naranja recién exprimido.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-9",
+            "nombre": "chocolate negro",
+            "tipo": "solido",
+            "estado": "activo",
+            "precioUnitario": "3.99",
+            "detalle": "Tableta de chocolate negro 70% cacao.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-10",
+            "nombre": "salmon fresco",
+            "tipo": "solido",
+            "estado": "inactivo",
+            "precioUnitario": "12.99",
+            "detalle": "Filete de salmón fresco de la costa.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-11",
+            "nombre": "leche de almendras",
+            "tipo": "liquido",
+            "estado": "inactivo",
+            "precioUnitario": "2.99",
+            "detalle": "Leche de almendras sin lactosa.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        },
+        {
+            "id": "id-12",
+            "nombre": "galletas de avena",
+            "tipo": "solido",
+            "estado": "activo",
+            "precioUnitario": "1.49",
+            "detalle": "Galletas de avena y pasas.",
+            "imagen": "./assets/img/default.jpg",
+            "ingredientes": "",
+            "comentariosAdicionales": ""
+        }
+    ]
+}

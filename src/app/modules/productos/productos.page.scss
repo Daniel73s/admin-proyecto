@@ -1,47 +1,62 @@
-
-
 .header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  // gap: 1rem;
+  div {
+    // border: 1px solid #ff0000;
+    flex-grow: 1;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  
-    ion-searchbar {
-      width: 300px;
-      --icon-color: var(--ion-color-tertiary);
-      --background: var(--ion-color-light);
-      --box-shadow: none;
-      --border-radius: 5px;
-    }
-  }
-  
-  .responsive {
-    overflow-x: auto;
-    display: block;
-    width: 100%;
-  }
-  
-  .table {
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-  }
-  
-  .table tbody tr {
-    height: 50px;
-    border-bottom: 1px solid #ccc;
-  }
-  table tbody tr td {
-    padding: 5px;
-  }
-  .content-center {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
   }
-  ion-thumbnail {
-    --size: 50px;
+
+  ion-searchbar {
+    width: 90%;
+    --icon-color: var(--ion-color-tertiary);
+    --background: var(--ion-color-light);
+    --box-shadow: none;
     --border-radius: 5px;
+    // border: 1px solid red;
+    // flex-grow:0.7;
   }
-  
-  
+}
+
+.responsive {
+  overflow-x: auto;
+  display: block;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.table tbody tr {
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+table tbody tr td {
+  padding: 5px;
+}
+
+.content-center {
+  display: flex;
+  justify-content: center;
+
+}
+
+ion-thumbnail {
+  --size: 50px;
+  --border-radius: 5px;
+}
+
+@media only screen and (max-width : 500px) {
+  ion-searchbar{
+    width: 100%;
+  }
+}

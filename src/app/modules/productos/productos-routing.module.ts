@@ -11,11 +11,11 @@ const routes: Routes = [
     component: ProductosPage
   },
   {
-    path:'modificar-producto',
+    path:'modificar-producto/:id',
     component:ModificarProductoPageComponent
   },
   {
-    path:'detalle-producto',
+    path:'detalle-producto/:id',
     component:DetalleProductoPageComponent
   }
 ];

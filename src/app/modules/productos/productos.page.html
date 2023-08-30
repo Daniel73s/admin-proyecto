@@ -8,7 +8,20 @@
           <ion-card-header>
             <div class="header-card">
               <ion-card-title>Productos</ion-card-title>
-                <ion-searchbar placeholder="Buscar Productos" (ionInput)="buscar($event)" [debounce]="250"></ion-searchbar>
+              <div>
+                <ion-searchbar placeholder="Buscar Productos" (ionInput)="buscar($event)" [debounce]="200"></ion-searchbar>
+              </div>
+              <ion-segment 	scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
+                <ion-segment-button value="todos">
+                  <ion-label>Todos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="activo">
+                  <ion-label>Activos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="inactivo">
+                  <ion-label>Inactivos</ion-label>
+                </ion-segment-button>
+              </ion-segment>
             </div>
           </ion-card-header>
           <ion-card-content>
@@ -18,41 +31,51 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>P.U</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th class="ion-text-center">Tipo</th>
+                    <th class="ion-text-center">Stock</th>
+                    <th class="ion-text-center">Precio Unitario</th>
+                    <th class="ion-text-center">Estado</th>
+                    <th class="ion-text-center">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]; let i=index">
+                  <tr *ngFor="let producto of listaProductos | filter:texto:'nombre';let i=index">
                     <td>{{i+1}}</td>
-                    <td class="content-center">
-                      <ion-item class="center" lines="none">
+                    <td>
+                      <ion-item lines="none">
                         <ion-thumbnail slot="start">
-                          <img src="https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg" />
+                          <img [src]="producto.imagen" />
                         </ion-thumbnail>
                         <ion-label>
-                          <h3>{{'platano' |uppercase}}</h3>
+                          <h3>{{producto.nombre |uppercase}}</h3>
+                          <p>{{producto.detalle}}</p>
                         </ion-label>
                       </ion-item>
                     </td>
-                    <td>1200 Uni.</td>
-                    <td>2 Bs</td>
-                    <td>
-                      <ion-badge color="success" style="color:white;" mode="ios">activo</ion-badge>
+                    <td class="ion-text-center">{{producto.tipo | uppercase}}</td>
+                    <td class="ion-text-center">{{producto.stock}} Uni.</td>
+                    <td class="ion-text-center">{{producto.precioUnitario}} Bs</td>
+                    <td class="ion-text-center">
+                      <ion-badge *ngIf="producto.estado==='activo'" color="success" mode="ios">Activo</ion-badge>
+                      <ion-badge *ngIf="producto.estado==='inactivo'"  color="warning" mode="ios">Inactivo</ion-badge>
                     </td>
-                    <td class="content-center">
-
-                      <ion-button  color="primary" fill="clear" title="Modificar Producto" routerLink="/dashboard/productos/modificar-producto">
-                        <ion-icon slot="icon-only" name="create"></ion-icon>
-                      </ion-button>
-                      <ion-button (click)="presentAlertConfirm()"  color="danger" fill="clear">
-                        <ion-icon slot="icon-only" name="trash"></ion-icon>
-                      </ion-button>
-                      <ion-button routerLink="/dashboard/productos/detalle-producto" color="tertiary" fill="clear">
-                        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-                      </ion-button>
+                    <td>
+                      <div class="content-center">
+                        <ion-button  color="primary" fill="clear" title="Modificar Producto" (click)="updateForm(producto.id)">
+                          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                        </ion-button>
+                        <!-- boton eliminar (eliminado logico) -->
+                        <ion-button *ngIf="producto.estado==='activo'" (click)="presentAlertConfirm('inactivo')"  color="danger" fill="clear">
+                          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                        </ion-button>
+                        <!-- boton reestablecer -->
+                        <ion-button *ngIf="producto.estado==='inactivo'" (click)="presentAlertConfirm('activo')"  color="success" fill="clear">
+                          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button (click)="opendetalles(producto.id)" color="tertiary" fill="clear">
+                          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                        </ion-button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

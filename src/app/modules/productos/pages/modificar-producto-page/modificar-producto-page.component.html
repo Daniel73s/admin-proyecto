@@ -6,7 +6,14 @@
         <ion-card style="box-shadow: none !important;">
           <ion-card-header>
             <ion-card-title>
-              Formulario para la modificacion del producto
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button routerLink="/dashboard/productos">
+                        <ion-icon slot="start" name="chevron-back-outline" ></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Formulario para la modificacion del producto</ion-title>
+            </ion-toolbar>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
@@ -15,17 +22,10 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="8" size-lg="8">
                     <ion-row>
-                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
+                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
                         <ion-item lines="none">
                           <ion-input [counter]="true" helperText="Nombre del producto" label="Nombre *" type="text"
                             labelPlacement="stacked" maxlength="50" formControlName="nombre" [errorText]="Error('nombre')">
-                          </ion-input>
-                        </ion-item>
-                      </ion-col>
-                      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
-                        <ion-item lines="none">
-                          <ion-input label="Cantidad *" labelPlacement="stacked" type="number" maxlength="5"
-                            helperText="Cantidad de producto (mayor a 100)" formControlName="cantidad" [errorText]="Error('cantidad')">
                           </ion-input>
                         </ion-item>
                       </ion-col>
@@ -56,7 +56,7 @@
                       </ion-col>
                       <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
                         <ion-item lines="none">
-                          <ion-textarea [errorText]="Error('ingredientes')" formControlName="ingredientes" helperText="Ingredientes del producto" [counter]="true" maxlength="250" rows="3" label="Ingredientes" type="text" labelPlacement="stacked"></ion-textarea>
+                          <ion-textarea  [errorText]="Error('ingredientes')" formControlName="ingredientes" helperText="Ingredientes del producto" [counter]="true" maxlength="250" rows="3" label="Ingredientes" type="text" labelPlacement="stacked"></ion-textarea>
                         </ion-item>
                       </ion-col>
                       <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">

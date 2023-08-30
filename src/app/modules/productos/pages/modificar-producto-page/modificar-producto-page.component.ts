@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { ProductosService } from '../../services/productos.service';
+import { Producto } from 'src/app/helpers/interfaces/producto.interface';
 
 @Component({
   selector: 'app-modificar-producto-page',
@@ -10,25 +12,30 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ModificarProductoPageComponent implements OnInit {
   public formmodProducto: FormGroup = new FormGroup('');
-  private loading:any;
-  constructor(private fb: FormBuilder,private router:Router,private loadingCtrl:LoadingController) { }
+  private loading: any;
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private _productos: ProductosService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.formInit();
+    const id = this.route.snapshot.paramMap.get('id');
+    this.formInit(id);
   }
 
-  public selectedImage: string = 'assets/img/default.jpg';
+  public selectedImage?: string= 'assets/img/default.jpg';
 
   handleFileChange(event: any) {
     const file = event.target.files[0];
-    this.formmodProducto.patchValue({imagen:URL.createObjectURL(file)})
+    this.formmodProducto.patchValue({ imagen: URL.createObjectURL(file) })
     this.selectedImage = URL.createObjectURL(file);
   }
 
-  public formInit() {
+  public formInit(id: string | null) {
     this.formmodProducto = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
-      cantidad: ['', [Validators.required, Validators.min(100)]],
       precioUnitario: ['', [Validators.required, Validators.min(1), Validators.max(2)]],
       tipo: ['', [Validators.required]],
       detalle: ['', [Validators.required, Validators.maxLength(250)]],
@@ -37,15 +44,25 @@ export class ModificarProductoPageComponent implements OnInit {
       imagen: ['']
     });
 
-    this.formmodProducto.patchValue({
-      nombre:'Platano',
-      cantidad:1200,
-      precioUnitario:2,
-      tipo:'solido',
-      detalle:'Los plátanos son una excelente fuente de nutrientes esenciales. Son ricos en vitamina C, vitamina B6, potasio y fibra dietética',
-      img:'https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg'
+    this.formPatch(id);
+  }
+
+  private async formPatch(id: string | null) {
+    const dataRaw: Producto[] = await this._productos.getProductos();
+    const data= dataRaw.find((item: Producto) => {
+      return item.id === id
     });
-    this.selectedImage='https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg';
+
+    this.formmodProducto.patchValue({
+      nombre: data?.nombre,
+      precioUnitario: data?.precioUnitario,
+      tipo: data?.tipo,
+      detalle:data?.detalle,
+      imagen: data?.imagen,
+      ingredientes:data?.ingredientes,
+      comentariosAdicionales:data?.comentariosAdicionales
+    });
+    this.selectedImage = data?.imagen
   }
 
   public update() {
@@ -53,6 +70,7 @@ export class ModificarProductoPageComponent implements OnInit {
     this.presentLoading();
     setTimeout(() => {
       this.loading.dismiss();
+      this.mensaje(2000, 'Se actualizo el producto correctamente', 'checkmark-outline', 'top')
       this.router.navigate(['/dashboard/productos']);
     }, 2000);
   }
@@ -61,13 +79,13 @@ export class ModificarProductoPageComponent implements OnInit {
     if (this.formmodProducto.get(control)?.hasError('required')) {
       return `Campo ${control} es obligatorio`
     }
-    if(this.formmodProducto.get(control)?.hasError('maxLength')){
+    if (this.formmodProducto.get(control)?.hasError('maxLength')) {
       return `el Campo ${control} no debe sobrepasar el limite permitido`
     }
-    if(this.formmodProducto.get(control)?.hasError('min')){
+    if (this.formmodProducto.get(control)?.hasError('min')) {
       return `Valor no permitido `
     }
-    if(this.formmodProducto.get(control)?.hasError('max')){
+    if (this.formmodProducto.get(control)?.hasError('max')) {
       return `Valor no permitido `
     }
     return
@@ -75,10 +93,20 @@ export class ModificarProductoPageComponent implements OnInit {
 
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({
-      message: 'Actualizando',
+      message: 'Actualizando Producto',
       spinner: 'dots'
     });
     await this.loading.present();
+  }
+
+  async mensaje(duration: number, message: string, icon: string, position: 'top' | 'bottom') {
+    const toast = await this.toastCtrl.create({
+      duration,
+      message,
+      icon,
+      position
+    });
+    toast.present();
   }
 
 }
