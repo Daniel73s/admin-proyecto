@@ -11,6 +11,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-proveedor-page.component';
 import { MaskitoModule } from '@maskito/angular';
 import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
+import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-pag
     ProveedoresPageRoutingModule,
     ComponentsModule,
     MaskitoModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   declarations: [ProveedoresPage,CrearProveedorPageComponent,ModificarProveedorPageComponent]
 })

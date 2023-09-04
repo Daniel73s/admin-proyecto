@@ -7,7 +7,20 @@
           <ion-card-header>
             <div class="header-card">
               <ion-card-title>Proveedores</ion-card-title>
+              <div>
                 <ion-searchbar placeholder="Buscar proveedor" (ionInput)="buscar($event)" [debounce]="250"></ion-searchbar>
+              </div>
+              <ion-segment 	scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
+                <ion-segment-button value="todos">
+                  <ion-label>Todos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="activo">
+                  <ion-label>Activos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="inactivo">
+                  <ion-label>Inactivos</ion-label>
+                </ion-segment-button>
+              </ion-segment>
             </div>
           </ion-card-header>
           <ion-card-content>
@@ -16,7 +29,7 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Empresa</th>
+                    <th style="float: left;">Empresa</th>
                     <th>Nit</th>
                     <th>C.S</th>
                     <th>Estado</th>
@@ -24,36 +37,46 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]; let i=index">
+                  <tr *ngFor="let proveedor of Arrproveedores | filter:texto:'razonSocial'; let i=index">
                     <td>{{i+1}}</td>
-                    <td class="content-center">
+                    <td>
                       <ion-item class="center" lines="none">
-                        <ion-icon slot="start" name="people-outline"></ion-icon>
+                        <!-- <ion-icon slot="start" name="people-outline"></ion-icon> -->
+                        <ion-thumbnail slot="start">
+                          <ion-img src="./assets/img/proveedor.jpg"></ion-img>
+                        </ion-thumbnail>
                         <ion-label>
-                          <h3>{{'Juan Loes Estrada' |uppercase}}</h3>
-                          <p>(+591) 68691858</p>
+                          <h3>{{proveedor.razonSocial |uppercase}}</h3>
+                          <p>{{proveedor.celular}}</p>
                         </ion-label>
                       </ion-item>
                     </td>
                     <td>
-                      123456789
+                      {{proveedor.nit || 'SIN NIT'}}
                     </td>
                     <td>
                       <!--  -->
-                      <ion-chip (click)="presentCS()">
+                      <ion-chip (click)="presentCS()" *ngIf="proveedor.cs==='pendiente'">
                         <ion-icon name="document-text-outline" color="warning"></ion-icon>
                         <ion-label>Pendiente</ion-label>
                       </ion-chip>
+                      <ion-text color="tertiary" *ngIf="proveedor.cs==='valido'">
+                        <span>Valido</span>
+                      </ion-text>
                     </td>
                     <td>
-                      <ion-badge style="color:white" color="success" mode="ios">Activo</ion-badge>
+                      <ion-badge *ngIf="proveedor.estado==='activo'" color="success" mode="ios">Activo</ion-badge>
+                      <ion-badge *ngIf="proveedor.estado==='inactivo'" color="warning" mode="ios">Inactivo</ion-badge>
                     </td>
                     <td class="content-center">
                       <ion-button routerLink="/dashboard/proveedores/modificar-proveedor" color="primary" fill="clear" title="Modificar Colegio">
-                        <ion-icon slot="icon-only" name="create"></ion-icon>
+                        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                       </ion-button>
-                      <ion-button (click)="presentAlertConfirm()" color="danger" fill="clear" title="Eliminar Colegio">
-                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                      <ion-button (click)="presentAlertConfirm('inactivo')" *ngIf="proveedor.estado==='activo'" color="danger" fill="clear" title="Eliminar Proveedor">
+                        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button (click)="presentAlertConfirm('activo')" *ngIf="proveedor.estado==='inactivo'" color="success" fill="clear" title="Habilitar Proveedor">
+                        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
                       </ion-button>
                       <ion-button  color="tertiary" fill="clear" title="Ver Colegio">
                         <ion-icon slot="icon-only" name="eye-outline"></ion-icon>

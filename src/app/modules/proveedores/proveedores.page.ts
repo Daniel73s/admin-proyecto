@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { ProveedoresService } from './services/proveedores.service';
+import { Proveedor } from 'src/app/helpers/interfaces/proveedor.interface';
 
 @Component({
   selector: 'app-proveedores',
@@ -8,38 +10,63 @@ import { AlertController, LoadingController, ToastController } from '@ionic/angu
 })
 export class ProveedoresPage implements OnInit {
 
-  constructor(private alertCtrl:AlertController,
-    private loadingCtrl:LoadingController,
-    private toastCtrl:ToastController) { }
+  constructor(private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private _Proveedores: ProveedoresService) { }
 
-    private loading:any;
+  private loading: any;
+  public texto:string='';
+  public Arrproveedores:Proveedor[]=[];
   ngOnInit() {
+    this.solicitarProveedores();
   }
 
-  public buscar(e:any){
-      console.log(e.target.value);
+  public buscar(e: any) {
+    console.log(e.target.value);
+    this.texto=e.target.value;
+  }
+  public filtrarporestado(e:any){
+    if (e.detail.value === 'todos') {
+      this.solicitarProveedores();
+    } else {
+      this._Proveedores.getProveedores().then(proveedores=>{
+        this.Arrproveedores=proveedores.filter(proveedor=>{
+          return proveedor.estado == e.detail.value
+        })
+      })
+    }
+      
   }
 
-  async presentAlertConfirm() {
+  private solicitarProveedores() {
+    this._Proveedores.getProveedores().then((proveedores:Proveedor[])=>{
+      this.Arrproveedores=proveedores;
+    }).catch(error=>{
+      console.log(error.message);
+    });
+  }
+
+  async presentAlertConfirm(accion: string) {
+    const btnText = accion === 'activo' ? "Habilitar" : "Eliminar";
+    const message = accion === 'activo' ? "¿ Decea habilitar proveedor ?" : "¿ Decea eliminar proveedor ?";
     const alert = await this.alertCtrl.create({
       header: 'Mensaje',
-      message: 'Decea dar de baja proveedor ?',
+      message,
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
-          cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Baja',
+          text: btnText,
           handler: () => {
-            console.log('Confirm Okay');
-            this.presentLoading('Procesando Baja');
+            this.presentLoading(accion);
             setTimeout(() => {
               this.loading.dismiss();
-              this.mensaje(2000,'Se dio de baja a proveedor','checkmark-outline','top');
+              this.mensaje(2000, 'Se realizo la accion correctamente', 'checkmark-outline', 'top');
             }, (2000));
           }
         }
@@ -49,7 +76,8 @@ export class ProveedoresPage implements OnInit {
     await alert.present();
   }
 
-  async presentLoading(message:string) {
+  async presentLoading(accion: string) {
+    const message = accion === 'activo' ? "Habilitando Proveedor" : "Eliminando Proveedor";
     this.loading = await this.loadingCtrl.create({
       message,
       spinner: 'dots'
@@ -57,7 +85,7 @@ export class ProveedoresPage implements OnInit {
     await this.loading.present();
   }
 
-  async mensaje(duration:number,message:string,icon:string,position: 'top' | 'bottom') {
+  async mensaje(duration: number, message: string, icon: string, position: 'top' | 'bottom') {
     const toast = await this.toastCtrl.create({
       duration,
       message,
@@ -86,7 +114,7 @@ export class ProveedoresPage implements OnInit {
             this.presentLoading('Procesando');
             setTimeout(() => {
               this.loading.dismiss();
-              this.mensaje(2000,'Se presento el certificado correspondiente','document-text-outline','top');
+              this.mensaje(2000, 'Se presento el certificado correspondiente', 'document-text-outline', 'top');
             }, (2000));
           }
         }

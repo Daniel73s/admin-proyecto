@@ -7,7 +7,7 @@
           <ion-note>hi@ionicframework.com</ion-note>
           <ion-item *ngFor="let menu of menuItems" color="tertiary" [routerLink]="menu.path"  routerLinkActive="selected">
             <ion-icon slot="start" [name]="menu.icon"></ion-icon>
-            <ion-label>{{ menu.title }}</ion-label>
+            <ion-text>{{ menu.title }}</ion-text>
           </ion-item>
         </ion-list>
       </ion-content>

@@ -11,7 +11,6 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ModificarProductoPageComponent } from './pages/modificar-producto-page/modificar-producto-page.component';
 import { DetalleProductoPageComponent } from './pages/detalle-producto-page/detalle-producto-page.component';
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
-import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,8 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProductosPageRoutingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    PipesModule,
-    HttpClientModule
+    PipesModule
   ],
   declarations: [ProductosPage,ModificarProductoPageComponent,DetalleProductoPageComponent]
 })

@@ -1,6 +1,11 @@
 // ion-menu ion-content {
 //   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 // }
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
+
+* {
+  font-family: 'Quicksand', sans-serif;
+}
 
 ion-menu.md ion-content {
   --padding-start: 8px;
@@ -131,11 +136,15 @@ ion-split-pane {
 
 .color-tertiary {
   background-color: var(--ion-color-tertiary);
-  ion-list-header{
+
+  ion-list-header {
     color: var(--ion-color-light);
   }
 }
 
 ion-item-group {
   margin-left: 20px; // Ajusta el tamaño del margen según tus necesidades
+}
+ion-label{
+  font-family: 'Quicksand', sans-serif;
 }
