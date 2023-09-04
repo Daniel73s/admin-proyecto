@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProveedoresPage } from './proveedores.page';
 import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-proveedor-page.component';
 import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
+import { DetalleProveedorPageComponent } from './pages/detalle-proveedor-page/detalle-proveedor-page.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,12 @@ const routes: Routes = [
     component: CrearProveedorPageComponent
   },
   {
-    path: 'modificar-proveedor',
+    path: 'modificar-proveedor/:id',
     component: ModificarProveedorPageComponent
+  },
+  {
+    path: 'detalle-proveedor/:id',
+    component: DetalleProveedorPageComponent
   }
 
 ];

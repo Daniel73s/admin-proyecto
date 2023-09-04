@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ProveedoresService } from './services/proveedores.service';
 import { Proveedor } from 'src/app/helpers/interfaces/proveedor.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-proveedores',
@@ -13,36 +14,38 @@ export class ProveedoresPage implements OnInit {
   constructor(private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private _Proveedores: ProveedoresService) { }
+    private _Proveedores: ProveedoresService,
+    private route: Router) { }
 
   private loading: any;
-  public texto:string='';
-  public Arrproveedores:Proveedor[]=[];
+  public texto: string = '';
+  public Arrproveedores: Proveedor[] = [];
   ngOnInit() {
     this.solicitarProveedores();
   }
 
   public buscar(e: any) {
     console.log(e.target.value);
-    this.texto=e.target.value;
+    this.texto = e.target.value;
   }
-  public filtrarporestado(e:any){
+
+  public filtrarporestado(e: any) {
     if (e.detail.value === 'todos') {
       this.solicitarProveedores();
     } else {
-      this._Proveedores.getProveedores().then(proveedores=>{
-        this.Arrproveedores=proveedores.filter(proveedor=>{
+      this._Proveedores.getProveedores().then(proveedores => {
+        this.Arrproveedores = proveedores.filter(proveedor => {
           return proveedor.estado == e.detail.value
         })
       })
     }
-      
+
   }
 
   private solicitarProveedores() {
-    this._Proveedores.getProveedores().then((proveedores:Proveedor[])=>{
-      this.Arrproveedores=proveedores;
-    }).catch(error=>{
+    this._Proveedores.getProveedores().then((proveedores: Proveedor[]) => {
+      this.Arrproveedores = proveedores;
+    }).catch(error => {
       console.log(error.message);
     });
   }
@@ -101,7 +104,7 @@ export class ProveedoresPage implements OnInit {
       message: '¿ Se presento el certificado sanitario correspondiente ?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -122,5 +125,13 @@ export class ProveedoresPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  public updateForm(id: string) {
+    this.route.navigate([`/dashboard/proveedores/modificar-proveedor/${id}`]);
+  }
+
+  public detalleProveedor(id: string) {
+    this.route.navigate([`/dashboard/proveedores/detalle-proveedor/${id}`]);
   }
 }

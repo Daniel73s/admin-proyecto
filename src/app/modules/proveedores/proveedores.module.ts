@@ -12,6 +12,7 @@ import { CrearProveedorPageComponent } from './pages/crear-proveedor-page/crear-
 import { MaskitoModule } from '@maskito/angular';
 import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
+import { DetalleProveedorPageComponent } from './pages/detalle-proveedor-page/detalle-proveedor-page.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
     ReactiveFormsModule,
     PipesModule
   ],
-  declarations: [ProveedoresPage,CrearProveedorPageComponent,ModificarProveedorPageComponent]
+  declarations: [ProveedoresPage,CrearProveedorPageComponent,ModificarProveedorPageComponent,DetalleProveedorPageComponent]
 })
 export class ProveedoresPageModule {}

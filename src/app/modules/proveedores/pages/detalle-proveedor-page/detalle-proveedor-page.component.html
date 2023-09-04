@@ -12,12 +12,12 @@
                         <ion-icon slot="start" name="chevron-back-outline" ></ion-icon>
                     </ion-button>
                 </ion-buttons>
-                <ion-title>Formulario para la creacion de un nuevo Proveedor</ion-title>
+                <ion-title>Formulario para la modificacion del Proveedor</ion-title>
             </ion-toolbar>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <form [formGroup]="formProveedor">
+            <form [formGroup]="proveedor">
               <ion-grid>
                 <ion-row>
                   <ion-col size="12">
@@ -27,17 +27,17 @@
                 <!-- primera fila -->
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item lines="none">
-                      <ion-input helperText="Nombre de la Empresa" label="Razon Social *" type="text"
-                        labelPlacement="stacked" formControlName="razonsocial" [errorText]="razonSocial_Error">
+                    <ion-item>
+                      <ion-input label="Razon Social" type="text"
+                        labelPlacement="stacked" formControlName="razonsocial" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
 
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item lines="none">
+                    <ion-item>
                       <ion-input label="Nit" labelPlacement="stacked" type="number" maxlength="10"
-                        helperText="Nit de la Empresa" formControlName="nit"  [errorText]="nit_Error">
+                        formControlName="nit" readonly >
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -45,19 +45,17 @@
                 <!-- segunda fila -->
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item lines="none">
-                      <ion-input helperText="Limite de productos entregados por dia" label="Limite *" type="number"
-                        labelPlacement="stacked" [errorText]="limite_Error" formControlName="limite">
+                    <ion-item>
+                      <ion-input label="Limite" type="text"
+                        labelPlacement="stacked" formControlName="limite" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-select justify="space-between" formControlName="cs" labelPlacement="stacked" label="Certificado Sanitario *"
-                      placeholder="Seleccione el Estado">
-                        <ion-select-option value="valido">Valido</ion-select-option>
-                        <ion-select-option value="pendiente">Pendiente</ion-select-option>
-                      </ion-select>
+                      <ion-input label="Certificado Sanitario" type="text"
+                        labelPlacement="stacked" formControlName="cs" readonly>
+                      </ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>
@@ -69,18 +67,16 @@
                 <!-- tercera fila  -->
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item lines="none">
-                      <ion-input formControlName="telefono" label="Telefono Fijo" labelPlacement="stacked"
-                        [maskito]="telefono" [maskitoElement]="maskPredicate"
-                        helperText="Numero de telefono fijo" [counter]="true" maxlength="12">
+                    <ion-item>
+                      <ion-input label="Telefono Fijo" type="text"
+                        labelPlacement="stacked" formControlName="telefonoFijo" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item lines="none">
-                      <ion-input formControlName="celular" label="Numero de Celular *" labelPlacement="stacked"
-                        [maskito]="celular" [maskitoElement]="maskPredicate"
-                        helperText="Numero de celular" [errorText]="celular_Error" [counter]="true" maxlength="15">
+                    <ion-item>
+                      <ion-input label="Telefono Fijo" type="text"
+                        labelPlacement="stacked" formControlName="celular" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -93,33 +89,25 @@
                 <!-- cuarta fila -->
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
-                    <ion-item lines="none">
-                      <ion-input formControlName="zona" label="Zona *" labelPlacement="stacked" type="text" maxlength="150"
-                        helperText="Zona en la que se encuentra el proveedor" [errorText]="zona_Error">
+                    <ion-item>
+                      <ion-input formControlName="zona" readonly label="Zona" labelPlacement="stacked" type="text" maxlength="150">
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
-                    <ion-item lines="none">
-                      <ion-input formControlName="calle" label="Calle" labelPlacement="stacked" type="text" maxlength="150"
-                        helperText="Calle de referencia">
+                    <ion-item>
+                      <ion-input formControlName="calle" readonly label="Calle" labelPlacement="stacked" type="text" maxlength="150"
+                        >
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
-                    <ion-item lines="none">
-                      <ion-input formControlName="numerodomicilio" label="Numero de domicilio" labelPlacement="stacked" type="text" maxlength="50"
-                        helperText="Numero de domicilio si cuenta con uno">
+                    <ion-item>
+                      <ion-input formControlName="numero" label="Numero de domicilio" labelPlacement="stacked" type="text" 
+                      maxlength="50" readonly
+                        >
                       </ion-input>
                     </ion-item>
-                  </ion-col>
-                </ion-row>
-                <!-- boton del formulario  -->
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-button color="primary" (click)="save()" [disabled]="formProveedor.invalid">
-                      guardar
-                    </ion-button>
                   </ion-col>
                 </ion-row>
               </ion-grid>

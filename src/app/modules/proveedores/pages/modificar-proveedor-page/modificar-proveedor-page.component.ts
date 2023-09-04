@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { MaskitoElementPredicateAsync, MaskitoOptions } from '@maskito/core';
+import { ProveedoresService } from '../../services/proveedores.service';
 @Component({
   selector: 'app-modificar-proveedor-page',
   templateUrl: './modificar-proveedor-page.component.html',
@@ -22,12 +23,15 @@ export class ModificarProveedorPageComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private router: Router) { }
+    private router: Router,
+    private _proveedores: ProveedoresService,
+    private route:ActivatedRoute) { }
   public readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
     this.formInit();
-    this.formpatch();
+    this.formpatch(id);
   }
 
   private formInit() {
@@ -36,11 +40,11 @@ export class ModificarProveedorPageComponent implements OnInit {
       nit: ['', [Validators.pattern(this.numberRegex)]],
       limite: ['', [Validators.required, Validators.pattern(this.numberRegex)]],
       cs: ['', [Validators.required]],
-      telefono: [''],
+      telefonoFijo: [''],
       celular: ['', [Validators.required]],
       zona: ['', [Validators.required]],
       calle: [''],
-      numerodomicilio: ['']
+      numero: ['']
     });
   }
 
@@ -55,17 +59,22 @@ export class ModificarProveedorPageComponent implements OnInit {
 
   }
 
-  private formpatch() {
+  private async formpatch(id:string | null) {
+    const data = await this._proveedores.getProveedores();
+    const proveedor = data.find(item => {
+      return item.id===id
+    });
+
     this.formmodProveedor.patchValue({
-      razonsocial: 'juan estrada',
-      nit: '123456789',
-      limite: 500,
-      cs: 'pendiente',
-      telefono: '',
-      celular: '(+591) 68691858',
-      zona: 'San Blas',
-      calle: 'avaroa',
-      numerodomicilio: ''
+      razonsocial: proveedor?.razonSocial,
+      nit: proveedor?.nit,
+      limite: proveedor?.limite,
+      cs: proveedor?.cs,
+      telefonoFijo: proveedor?.telefonoFijo,
+      celular:proveedor?.celular,
+      zona: proveedor?.zona,
+      calle: proveedor?.calle,
+      numero: proveedor?.numero
     })
   }
 

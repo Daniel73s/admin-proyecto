@@ -6,8 +6,8 @@
             "nit": 1234567890,
             "limite": 10000,
             "cs": "valido",
-            "telefonoFijo": "123-456-7890",
-            "celular": "987-654-3210",
+            "telefonoFijo": "(4) 66-98541",
+            "celular": "+(591) 65896521",
             "zona": "Zona A",
             "calle": "Calle Principal",
             "numero": "123",
@@ -18,7 +18,7 @@
             "razonSocial": "proveedor b",
             "limite": 5000,
             "cs": "pendiente",
-            "celular": "555-555-5555",
+            "celular": "+(591) 78596235",
             "zona": "Zona B",
             "estado":"activo"
           },
@@ -27,7 +27,7 @@
             "razonSocial": "proveedor c",
             "limite": 8000,
             "cs": "valido",
-            "celular": "111-222-3333",
+            "celular": "+(591) 66369854",
             "zona": "Zona C",
             "calle": "Calle Secundaria",
             "numero": "45",
@@ -38,7 +38,7 @@
             "razonSocial": "proveedor d",
             "limite": 7000,
             "cs": "valido",
-            "celular": "777-777-7777",
+            "celular": "+(591) 78545996",
             "zona": "Zona D",
             "estado":"activo"
           }       

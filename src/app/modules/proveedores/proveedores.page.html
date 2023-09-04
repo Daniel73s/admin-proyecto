@@ -69,7 +69,7 @@
                       <ion-badge *ngIf="proveedor.estado==='inactivo'" color="warning" mode="ios">Inactivo</ion-badge>
                     </td>
                     <td class="content-center">
-                      <ion-button routerLink="/dashboard/proveedores/modificar-proveedor" color="primary" fill="clear" title="Modificar Colegio">
+                      <ion-button color="primary" (click)="updateForm(proveedor.id)" fill="clear" title="Modificar Proveedor">
                         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                       </ion-button>
                       <ion-button (click)="presentAlertConfirm('inactivo')" *ngIf="proveedor.estado==='activo'" color="danger" fill="clear" title="Eliminar Proveedor">
@@ -78,7 +78,7 @@
                       <ion-button (click)="presentAlertConfirm('activo')" *ngIf="proveedor.estado==='inactivo'" color="success" fill="clear" title="Habilitar Proveedor">
                         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
                       </ion-button>
-                      <ion-button  color="tertiary" fill="clear" title="Ver Colegio">
+                      <ion-button  color="tertiary" fill="clear" title="Ver Proveedor" (click)="detalleProveedor(proveedor.id)">
                         <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                       </ion-button>
                     </td>

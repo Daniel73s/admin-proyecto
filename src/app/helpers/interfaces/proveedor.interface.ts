@@ -9,5 +9,5 @@ export interface Proveedor {
     zona: string;
     calle?:string;
     numero?:string;
-    estado:'activo' | 'inactivo';
+    estado?:'activo' | 'inactivo';
   }
