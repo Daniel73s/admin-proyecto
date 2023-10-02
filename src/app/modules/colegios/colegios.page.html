@@ -7,49 +7,80 @@
           <ion-card-header>
             <div class="header-card">
               <ion-card-title>Colegios</ion-card-title>
-                <ion-searchbar placeholder="Buscar colegio" (ionInput)="buscar($event)" [debounce]="250"></ion-searchbar>
+              <div>
+                <ion-searchbar *ngIf="!load" placeholder="Buscar colegio" (ionInput)="buscar($event)"
+                  [debounce]="250"></ion-searchbar>
+              </div>
+              <!-- (ionChange)="filtrarporestado($event)" -->
+              <ion-segment scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
+                <ion-segment-button value="todos">
+                  <ion-label>Todos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="activo">
+                  <ion-label>Activos</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="inactivo">
+                  <ion-label>Inactivos</ion-label>
+                </ion-segment-button>
+              </ion-segment>
             </div>
           </ion-card-header>
           <ion-card-content>
-            <div class="responsive">
+            <div class="load" *ngIf="load">
+              <ion-spinner name="circular"></ion-spinner>
+            </div>
+            <div class="responsive" *ngIf="!load">
               <table class="table">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Cliente</th>
+                    <th>
+                    <div style="width: 100%; display: flex; justify-content: flex-start;">
+                       <span style="margin-left: 30px;">Colegio</span>
+                    </div>
+                    </th>
                     <th>Estado</th>
-                    <th>Direccion</th>
+                    <th>Zona</th>
                     <th>Estudiantes</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of [1,1,1,1,1]; let i=index">
+                  <tr *ngFor="let colegio of arr_colegios | filter:textobuscar:'nombre'; let i=index">
                     <td>{{i+1}}</td>
-                    <td class="content-center">
+                    <td>
                       <ion-item class="center" lines="none">
                         <ion-thumbnail slot="start">
                           <img src="assets/img/logo-colegio.png" />
                         </ion-thumbnail>
                         <ion-label>
-                          <h3>{{'San jorge II' |uppercase}}</h3>
-                          <p>(+591) 68691858</p>
+                          <h3>{{colegio.nombre |uppercase}}</h3>
+                          <p>{{colegio.num_celular}}</p>
                         </ion-label>
                       </ion-item>
                     </td>
                     <td>
-                      <ion-badge style="color:white" color="success" mode="ios">Activo</ion-badge>
+                      <ion-badge [color]="colegio.estado ? 'success' : 'warning'" mode="ios">
+                        {{colegio.estado ? 'Activo':'Inactivo'}}
+                      </ion-badge>
                     </td>
-                    <td>Barrio miraflores</td>
-                    <td>326</td>
+                    <td>{{colegio.zona}}</td>
+                    <td>{{colegio.estudiantes}}</td>
                     <td class="content-center">
-                      <ion-button color="primary" routerLink="/dashboard/colegios/modificar-colegio" fill="clear" title="Modificar Colegio">
+                      <ion-button color="primary" routerLink="/dashboard/colegios/modificar-colegio" fill="clear"
+                        title="Modificar Colegio">
                         <ion-icon slot="icon-only" name="create"></ion-icon>
                       </ion-button>
-                      <ion-button (click)="presentAlertConfirm()" color="danger" fill="clear" title="Eliminar Colegio">
+                      <!-- botones de eliminar y habilitar seguen el estado -->
+                      <ion-button (click)="presentAlertConfirm('baja',colegio.id_colegio)" *ngIf="colegio.estado" color="danger" fill="clear" title="Eliminar Colegio">
                         <ion-icon slot="icon-only" name="trash"></ion-icon>
                       </ion-button>
-                      <ion-button  color="tertiary" fill="clear" title="Ver Colegio">
+                      <ion-button (click)="presentAlertConfirm('habilitar',colegio.id_colegio)" *ngIf="!colegio.estado"   color="success" fill="clear"
+                        title="Habilitar Colegio">
+                        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+                      </ion-button>
+                      <!-- ---------------------------------------------------------- -->
+                      <ion-button color="tertiary" fill="clear" title="Ver Colegio">
                         <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                       </ion-button>
                     </td>
@@ -63,8 +94,8 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-fab  vertical="bottom" horizontal="end">
-  <ion-fab-button color="tertiary" [routerLink]="['/dashboard/colegios/crear-colegio']" >
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button color="tertiary" [routerLink]="['/dashboard/colegios/crear-colegio']">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

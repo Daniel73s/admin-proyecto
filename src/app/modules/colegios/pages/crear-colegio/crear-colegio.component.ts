@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { MaskitoOptions, MaskitoElementPredicateAsync } from '@maskito/core';
 import { MapaModalComponent } from '../../modals/mapa-modal/mapa-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ColegiosService } from '../../services/colegios.service';
+import { Colegio } from 'src/app/helpers/interfaces/colegio.interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-crear-colegio',
   templateUrl: './crear-colegio.component.html',
@@ -19,7 +22,7 @@ export class CrearColegioComponent implements OnInit {
 
   private numberRegex = /^[0-9]+$/;
 
-  constructor(private modalCtrl: ModalController, private fb: FormBuilder) { }
+  constructor(private modalCtrl: ModalController, private fb: FormBuilder, private _colegio: ColegiosService,private toastCtrl:ToastController,private router:Router) { }
   public readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
   //inicializando una variable de tipo formGroup
   public formAdd: FormGroup = new FormGroup('');
@@ -34,32 +37,79 @@ export class CrearColegioComponent implements OnInit {
       estudiantes: ['', [Validators.required, Validators.pattern(this.numberRegex)]],
       dependencia: ['', Validators.required],
       niveles: ['', Validators.required],
-      calle: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
-      numero: ['', Validators.maxLength(10)],
-      ciudad: ['', Validators.required],
-      zona: ['', Validators.maxLength(30)],
-      ageografica: ['', Validators.required],
-      coordenadas: ['', Validators.required],
-      telefono: ['', [Validators.minLength(12)]],
-      celular: ['', [Validators.minLength(15)]],
-      email: ['', [Validators.email, Validators.maxLength(50)]],
+
+      ubicacion: this.fb.group({
+        calle: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
+        numero: ['', Validators.maxLength(10)],
+        ciudad: ['', Validators.required],
+        zona: ['', Validators.maxLength(30)],
+        ageografica: ['', Validators.required],
+        coordenadas: ['', Validators.required]
+      }),
+
+      contacto: this.fb.group({
+        telefono: ['', [Validators.minLength(12)]],
+        celular: ['', [Validators.minLength(15)]],
+        email: ['', [Validators.email, Validators.maxLength(50)]]
+      }),
     });
   }
 
   async abrirMapa() {
+    const coordenadas = this.formAdd.get('ubicacion.coordenadas')?.value;
+    let partes;
+    if (coordenadas == '') {
+      partes = ['-64.731242', '-21.529409']
+    } else {
+      partes = coordenadas.split(',');
+    }
+    // console.log(partes,'partes separadas');
     const modal = await this.modalCtrl.create({
       component: MapaModalComponent,
+      componentProps: {
+        lng: partes[0],
+        lat: partes[1]
+      },
       cssClass: 'custom-modal'
     });
     await modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role == 'ok') {
+      this.formAdd.get('ubicacion.coordenadas')?.patchValue(`${data.lng},${data.lat}`);
+    }
   }
 
 
-  guardar() {
+  public guardar() {
     console.log(this.formAdd.getRawValue());
-
+    const {rue,nombre,estudiantes,dependencia,niveles,ubicacion,contacto}=this.formAdd.getRawValue();
+    const coords=ubicacion.coordenadas.split(',');
+    this._colegio.crearColegio(
+      {rue,nombre,estudiantes,dependencia,niveles}).then((resp: any) => {
+        const id_colegio=resp.id;
+         this._colegio.ubicacionColegio({id_colegio,longitud:coords[0],latitud:coords[1],...ubicacion}).then(()=>{
+           this._colegio.contactoColegio({id_colegio,...contacto}).then((resp:any)=>{
+             this.router.navigate(['/dashboard/colegios']);
+             this.mensaje(resp.msg,'checkmark-outline');
+           }).catch((error:any)=>{
+            console.log(error);
+           });
+         });
+    }).catch(error=>{
+      this.mensaje(`Ocurrio un error inesperado al momento de la creacion ${error}`,'alert-outline');
+    });
   }
 
+  async mensaje(message:string,icon:string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      position:'top',
+      icon
+    });
+    toast.present();
+  }
   //Mensajes de error para el campo Rue
   get rue_Error() {
     if (this.formAdd.get('rue')?.hasError('required')) {
@@ -76,6 +126,7 @@ export class CrearColegioComponent implements OnInit {
     }
     return
   }
+
   //mensajes de error para el campo de estudiantes
   get estudiantes_Error() {
     if (this.formAdd.get('estudiantes')?.hasError('required')) {
@@ -103,13 +154,13 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Calle
   get calle_Error() {
-    if (this.formAdd.get('calle')?.hasError('required')) {
+    if (this.formAdd.get('ubicacion.calle')?.hasError('required')) {
       return 'Campo debe ser llenado';
     }
-    if (this.formAdd.get('calle')?.hasError('maxlength')) {
+    if (this.formAdd.get('ubicacion.calle')?.hasError('maxlength')) {
       return `El campo solo acepta ${this.Nombre_MaxLength} caracteres`;
     }
-    if (this.formAdd.get('calle')?.hasError('minlength')) {
+    if (this.formAdd.get('ubicacion.calle')?.hasError('minlength')) {
       return `El campo debe tener al menos ${this.Nombre_MinLength} caracteres`;
     }
     return
@@ -117,7 +168,7 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Numero
   get numero_Error() {
-    if (this.formAdd.get('numero')?.hasError('maxlength')) {
+    if (this.formAdd.get('ubicacion.numero')?.hasError('maxlength')) {
       return 'El campo solo acepta 10 caracteres';
     }
 
@@ -126,7 +177,7 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Zona
   get zona_Error() {
-    if (this.formAdd.get('zona')?.hasError('maxlength')) {
+    if (this.formAdd.get('ubicacion.zona')?.hasError('maxlength')) {
       return 'El campo solo acepta 30 caracteres';
     }
 
@@ -135,7 +186,7 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Coordenadas
   get coordenadas_Error() {
-    if (this.formAdd.get('coordenadas')?.hasError('required')) {
+    if (this.formAdd.get('ubicacion.coordenadas')?.hasError('required')) {
       return 'Campo debe ser llenado';
     }
 
@@ -144,7 +195,7 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Telefono
   get telefono_Error() {
-    if (this.formAdd.get('telefono')?.hasError('minlength')) {
+    if (this.formAdd.get('contacto.telefono')?.hasError('minlength')) {
       return `El campo no cumple como numero de telefono fijo`;
     }
 
@@ -153,7 +204,7 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Celular
   get celular_Error() {
-    if (this.formAdd.get('celular')?.hasError('minlength')) {
+    if (this.formAdd.get('contacto.celular')?.hasError('minlength')) {
       return `El campo no cumple como numero de celular`;
     }
     return
@@ -161,11 +212,11 @@ export class CrearColegioComponent implements OnInit {
 
   //Mensajes de error para el campo Celular
   get email_Error() {
-    if (this.formAdd.get('email')?.hasError('email')) {
+    if (this.formAdd.get('contacto.email')?.hasError('email')) {
       return `Email invalido`;
     }
 
-    if (this.formAdd.get('email')?.hasError('maxlength')) {
+    if (this.formAdd.get('contacto.email')?.hasError('maxlength')) {
       return `Email demaciado largo solo se aceptan 50 caracteres`;
     }
     return

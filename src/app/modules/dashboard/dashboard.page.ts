@@ -7,8 +7,11 @@ import { MenuItem} from 'src/app/helpers/interfaces/menu.interface';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+  showOpciones = false;
 
-
+  toggleOpciones() {
+    this.showOpciones = !this.showOpciones;
+  }
   menuItems:any[]=[
     {
       title:'inicio',
@@ -17,7 +20,7 @@ export class DashboardPage implements OnInit {
     },
     {
       title:'Colegios',
-      path:'/dashboard/colegios/listar-colegios',
+      path:'/dashboard/colegios',
       icon:'shield-half-outline'
     },
     {

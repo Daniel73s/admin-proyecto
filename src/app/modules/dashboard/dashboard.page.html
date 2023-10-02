@@ -2,12 +2,34 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content color="tertiary">
-        <ion-list id="inbox-list" class="color-tertiary" lines="none">
+        <!-- <ion-list id="inbox-list" class="color-tertiary" lines="none">
           <ion-list-header>Inbox</ion-list-header>
           <ion-note>hi@ionicframework.com</ion-note>
           <ion-item *ngFor="let menu of menuItems" color="tertiary" [routerLink]="menu.path"  routerLinkActive="selected">
             <ion-icon slot="start" [name]="menu.icon"></ion-icon>
             <ion-text>{{ menu.title }}</ion-text>
+          </ion-item>
+        </ion-list> -->
+
+        <ion-list id="inbox-list" class="color-tertiary" lines="none">
+          <ion-list-header>Inbox</ion-list-header>
+          <ion-note>hi@ionicframework.com</ion-note>
+        </ion-list> 
+
+        <!-- Elemento de menú con botón de opciones -->
+        <ion-item color="tertiary" (click)="toggleOpciones()">
+          <ion-icon slot="start" name="shield-half-outline"></ion-icon>
+          <ion-label>Colegios</ion-label>
+          <ion-icon slot="end" [name]="showOpciones ? 'chevron-up' : 'chevron-down'"></ion-icon>
+        </ion-item>
+        <ion-list *ngIf="showOpciones" class="color-tertiary">
+          <ion-item color="tertiary" routerLink="/dashboard/colegios/listar-colegios" routerLinkActive="selected">
+            <ion-icon slot="start" name="list-outline"></ion-icon>
+            Listar colegio
+          </ion-item>
+          <ion-item color="tertiary" routerLink="/dashboard/colegios/crear-colegio" routerLinkActive="selected">
+            <ion-icon slot="start" name="pencil-outline"></ion-icon>
+            Crear nuevo colegio
           </ion-item>
         </ion-list>
       </ion-content>

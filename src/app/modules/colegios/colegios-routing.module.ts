@@ -20,6 +20,10 @@ const routes: Routes = [
     path:'modificar-colegio',
     component:ModificarColegioPageComponent
   },
+  // {
+  //   path:'',
+  //   component:ColegiosPage
+  // },
   {
     path:'listar-colegios',
     component:ColegiosPage

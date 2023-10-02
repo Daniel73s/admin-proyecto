@@ -4,9 +4,19 @@
 }
 
 .marker_class{
-    width: 50px;
-    height: 50px;
-    background-image: url('../../../../../assets/img/pin.png');
+    width: 3rem;
+    height: 3rem;
+    background-image: url('../../../../../assets/img/pin.svg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.btn-atras{
+    position: absolute;
+    top:20px;
+    left:20px;
+}
+.btn-ok{
+    position: absolute;
+    top:20px;
+    right: 20px;
 }
