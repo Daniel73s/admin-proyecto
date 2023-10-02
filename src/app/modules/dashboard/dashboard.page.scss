@@ -148,3 +148,14 @@ ion-item-group {
 ion-label{
   font-family: 'Quicksand', sans-serif;
 }
+.left{
+  margin-left: 15px;
+}
+.pointer{
+  cursor: pointer;
+}
+.selected{
+  ion-text{
+    color: var(--ion-color-primary);
+  }
+}

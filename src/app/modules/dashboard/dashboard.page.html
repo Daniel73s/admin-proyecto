@@ -1,37 +1,40 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu contentId="main-content" type="overlay" #menuid>
       <ion-content color="tertiary">
-        <!-- <ion-list id="inbox-list" class="color-tertiary" lines="none">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
-          <ion-item *ngFor="let menu of menuItems" color="tertiary" [routerLink]="menu.path"  routerLinkActive="selected">
-            <ion-icon slot="start" [name]="menu.icon"></ion-icon>
-            <ion-text>{{ menu.title }}</ion-text>
-          </ion-item>
-        </ion-list> -->
-
         <ion-list id="inbox-list" class="color-tertiary" lines="none">
           <ion-list-header>Inbox</ion-list-header>
           <ion-note>hi@ionicframework.com</ion-note>
-        </ion-list> 
-
-        <!-- Elemento de menú con botón de opciones -->
-        <ion-item color="tertiary" (click)="toggleOpciones()">
-          <ion-icon slot="start" name="shield-half-outline"></ion-icon>
-          <ion-label>Colegios</ion-label>
-          <ion-icon slot="end" [name]="showOpciones ? 'chevron-up' : 'chevron-down'"></ion-icon>
-        </ion-item>
-        <ion-list *ngIf="showOpciones" class="color-tertiary">
-          <ion-item color="tertiary" routerLink="/dashboard/colegios/listar-colegios" routerLinkActive="selected">
-            <ion-icon slot="start" name="list-outline"></ion-icon>
-            Listar colegio
-          </ion-item>
-          <ion-item color="tertiary" routerLink="/dashboard/colegios/crear-colegio" routerLinkActive="selected">
-            <ion-icon slot="start" name="pencil-outline"></ion-icon>
-            Crear nuevo colegio
-          </ion-item>
         </ion-list>
+        <div>
+          <div *ngFor="let item of menu">
+            <div class="color-tertiary" *ngIf="item.multiple">
+              <ion-item color="tertiary"  (click)="mostrar(item.id)" class="pointer">
+                <ion-icon slot="start" [name]="item.icon"></ion-icon>
+                <ion-label>{{item.title}}</ion-label>
+                <ion-icon slot="end" [name]="item.open ? 'chevron-up' : 'chevron-down'"></ion-icon>
+              </ion-item>
+              <div *ngIf="item.open">
+                <ng-container *ngTemplateOutlet="submenus;context:{sub:item.submenu}"></ng-container>
+              </div>
+            </div>
+            <ion-item *ngIf="!item.multiple" color="tertiary" [routerLink]="item.path" routerLinkActive="selected">
+              <ion-icon slot="start" [name]="item.icon"></ion-icon>
+              <ion-text>
+                <span>{{item.title}}</span>
+              </ion-text>
+            </ion-item>
+          </div>
+        </div>
+        <ng-template #submenus let-submenu="sub">
+          <ion-item class="left" color="tertiary" (click)="cerrarmenu()" *ngFor="let item of submenu" [routerLink]="item.path"
+            routerLinkActive="selected">
+            <ion-icon slot="start" [name]="item.icon"></ion-icon>
+            <ion-text>
+              <span>{{item.title}}</span>
+            </ion-text>
+          </ion-item>
+        </ng-template>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
