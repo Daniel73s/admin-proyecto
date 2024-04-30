@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ColegiosPage } from './colegios.page';
 import { CrearColegioComponent } from './pages/crear-colegio/crear-colegio.component';
 import { ModificarColegioPageComponent } from './pages/modificar-colegio-page/modificar-colegio-page.component';
+import { DetalleColegioPageComponent } from './pages/detalle-colegio-page/detalle-colegio-page.component';
 
 const routes: Routes = [
   {
@@ -17,8 +18,12 @@ const routes: Routes = [
   },
   
   {
-    path:'modificar-colegio',
+    path:'modificar-colegio/:id',
     component:ModificarColegioPageComponent
+  },
+  {
+    path:'informacion-colegio/:id',
+    component:DetalleColegioPageComponent
   },
   // {
   //   path:'',

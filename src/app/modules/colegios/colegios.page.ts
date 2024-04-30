@@ -1,18 +1,21 @@
-import { Component} from '@angular/core';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ColegiosService } from './services/colegios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-colegios',
   templateUrl: './colegios.page.html',
   styleUrls: ['./colegios.page.scss'],
 })
-export class ColegiosPage{
+export class ColegiosPage {
 
   constructor(private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private _colegios: ColegiosService) { }
+    private _colegios: ColegiosService,
+    private router: Router,
+    private modalCtrl: ModalController) { }
   private loading: any;
   public arr_colegios: any[] = [];
   public load: boolean = true;
@@ -21,7 +24,7 @@ export class ColegiosPage{
   //   this.colegios();
   // }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.colegios();
   }
 
@@ -51,7 +54,6 @@ export class ColegiosPage{
     })
   }
 
-
   async presentAlertConfirm(accion: string, id: string) {
     const message = accion === 'baja' ? 'Esta seguro de dar de baja al colegio?' : 'Esta seguro de habilitar al colegio?';
     const alert = await this.alertCtrl.create({
@@ -64,7 +66,7 @@ export class ColegiosPage{
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel: blah');
-            this.mensaje(2000,'Se cancelo la accion', 'close-outline', 'top');
+            this.mensaje(2000, 'Se cancelo la accion', 'close-outline', 'top');
           }
         }, {
           text: accion,
@@ -110,5 +112,13 @@ export class ColegiosPage{
       position
     });
     toast.present();
+  }
+
+  public updateVentana(id: string) {
+    this.router.navigate([`/dashboard/colegios/modificar-colegio/${id}`])
+  }
+
+  public detalle_colegio(id:string) {
+     this.router.navigate([`/dashboard/colegios/informacion-colegio/${id}`]);
   }
 }

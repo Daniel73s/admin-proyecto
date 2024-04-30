@@ -1,0 +1,158 @@
+<app-header></app-header>
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card style="box-shadow: none !important;">
+          <ion-card-header>
+            <ion-card-title>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button routerLink="/dashboard/colegios/listar-colegios">
+                        <ion-icon slot="start" color="dark" name="chevron-back-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>
+                  <div class="ion-text-wrap">
+                    Acerca del colegio {{colegio.nombre}}
+                  </div>
+                </ion-title>
+                <ion-chip slot="end" [color]="colegio.estado?'success':'warning'" mode="ios" outline="false">
+                  <ion-label>{{colegio.estado?'Activo' : 'Inactivo'}}</ion-label>
+                </ion-chip>
+              </ion-toolbar>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <!-- informacion general -->
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text color="medium">
+                    <span style="font-weight: 500;">Informacion general</span>
+                  </ion-text>
+
+                  <ion-row>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Rue:" [value]="colegio.rue"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Nombre:" [value]="colegio.nombre"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Estudiantes:" [value]="colegio.estudiantes"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Dependencia:" [value]="colegio.dependencia"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="12">
+                      <ion-item>
+                        <ion-input label="Nivel:" [value]="colegio.nivel"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+              <!-- informacion de ubicacion -->
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text color="medium">
+                    <span>Ubicacion</span>
+                  </ion-text>
+
+                  <ion-row>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Calle:" [value]="colegio.calle"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Numero:" [value]="colegio.numero"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Ciudad:" [value]="colegio.ciudad"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Zona:" [value]="colegio.zona"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Area geografica:"[value]="colegio.area_geografica"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Abrir ubicacion" readonly></ion-input>
+                        <ion-button (click)="abrir_mapa()" expand="block" slot="end" fill="outline">
+                          <ion-icon name="map-outline"></ion-icon>
+                        </ion-button>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+
+              <!-- informacion de contacto -->
+              <ion-row>
+                <ion-col size="12">
+                  <ion-text color="medium">
+                    <span>Contacto</span>
+                  </ion-text>
+                  <ion-row>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Telefono Fijo:" [value]="colegio.tel_fijo"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item>
+                        <ion-input label="Numero de Celular:"[value]="colegio.num_celular"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size-lg="6" size-xs="12">
+                      <ion-item class="ion-text-wrap">
+                        <ion-input label="Email:" [value]="colegio.email"></ion-input>
+                        <ion-icon slot="end" name="checkmark-outline" color="success"></ion-icon>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+</ion-content>

@@ -72,7 +72,7 @@
                       <ion-select formControlName="dependencia" justify="space-between" labelPlacement="stacked"
                         label="Dependencia *" placeholder="Seleccione Dependencia">
                         <ion-select-option value="fiscal">Fiscal</ion-select-option>
-                        <ion-select-option value="privado">Privado</ion-select-option>
+                        <ion-select-option value="privado" disabled>Privado</ion-select-option>
                       </ion-select>
                     </ion-item>
 
@@ -130,8 +130,8 @@
                       <ion-item>
                         <ion-select justify="space-between" labelPlacement="stacked" label="Area Geografica *"
                           placeholder="Area Geografica" formControlName="ageografica">
-                          <ion-select-option value="urbano">Urbana</ion-select-option>
-                          <ion-select-option value="rural">Rural</ion-select-option>
+                          <ion-select-option value="URBANO">Urbano</ion-select-option>
+                          <ion-select-option value="RURAL" disabled>Rural</ion-select-option>
                         </ion-select>
                       </ion-item>
                     </ion-col>
@@ -145,8 +145,6 @@
                           <ion-icon name="map-outline"></ion-icon>
                           <!-- abrir mapa -->
                         </ion-button>
-                        <!-- <ion-chip slot="end" (click)="abrirMapa()" color="primary" mode="ios" outline="false">
-                        </ion-chip> -->
                       </ion-item>
                     </ion-col>
                   
@@ -188,9 +186,13 @@
                 <ion-row>
                   <!-- [disabled]="formAdd.invalid" -->
                   <ion-col size="12">
-                    <ion-button color="primary" (click)="guardar()">
-                      guardar
+                    <ion-button color="tertiary" (click)="volver()">
+                      cancelar
                     </ion-button>
+                    <ion-button [disabled]="formAdd.invalid" color="primary" (click)="guardar()">
+                      guardar <ion-icon slot="end" name="save"></ion-icon>
+                    </ion-button>
+                   
                   </ion-col>
                 </ion-row>
               </ion-grid>

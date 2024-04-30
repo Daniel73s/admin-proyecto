@@ -29,7 +29,7 @@
         <ng-template #submenus let-submenu="sub">
           <ion-item class="left" color="tertiary" (click)="cerrarmenu()" *ngFor="let item of submenu" [routerLink]="item.path"
             routerLinkActive="selected">
-            <ion-icon slot="start" [name]="item.icon"></ion-icon>
+            <!-- <ion-icon slot="start" [name]="item.icon"></ion-icon> -->
             <ion-text>
               <span>{{item.title}}</span>
             </ion-text>

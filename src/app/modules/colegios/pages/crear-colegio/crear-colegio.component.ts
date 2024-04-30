@@ -39,7 +39,7 @@ export class CrearColegioComponent implements OnInit {
       niveles: ['', Validators.required],
 
       ubicacion: this.fb.group({
-        calle: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]],
+        calle: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(5)]],
         numero: ['', Validators.maxLength(10)],
         ciudad: ['', Validators.required],
         zona: ['', Validators.maxLength(30)],
@@ -51,8 +51,12 @@ export class CrearColegioComponent implements OnInit {
         telefono: ['', [Validators.minLength(12)]],
         celular: ['', [Validators.minLength(15)]],
         email: ['', [Validators.email, Validators.maxLength(50)]]
-      }),
+      })
     });
+  }
+
+  public volver(){
+    this.router.navigate(['/dashboard/colegios/listar-colegios']);
   }
 
   async abrirMapa() {
@@ -158,10 +162,10 @@ export class CrearColegioComponent implements OnInit {
       return 'Campo debe ser llenado';
     }
     if (this.formAdd.get('ubicacion.calle')?.hasError('maxlength')) {
-      return `El campo solo acepta ${this.Nombre_MaxLength} caracteres`;
+      return `El campo solo acepta 150 caracteres`;
     }
     if (this.formAdd.get('ubicacion.calle')?.hasError('minlength')) {
-      return `El campo debe tener al menos ${this.Nombre_MinLength} caracteres`;
+      return `El campo debe tener al menos 5 caracteres`;
     }
     return
   }

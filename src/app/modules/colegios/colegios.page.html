@@ -67,7 +67,7 @@
                     <td>{{colegio.zona}}</td>
                     <td>{{colegio.estudiantes}}</td>
                     <td class="content-center">
-                      <ion-button color="primary" routerLink="/dashboard/colegios/modificar-colegio" fill="clear"
+                      <ion-button color="primary" (click)="updateVentana(colegio.id_colegio)" fill="clear"
                         title="Modificar Colegio">
                         <ion-icon slot="icon-only" name="create"></ion-icon>
                       </ion-button>
@@ -80,7 +80,7 @@
                         <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
                       </ion-button>
                       <!-- ---------------------------------------------------------- -->
-                      <ion-button color="tertiary" fill="clear" title="Ver Colegio">
+                      <ion-button color="tertiary" fill="clear" title="Informacion Colegio" (click)="detalle_colegio(colegio.id_colegio)" >
                         <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                       </ion-button>
                     </td>
@@ -93,9 +93,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
-<ion-fab vertical="bottom" horizontal="end">
-  <ion-fab-button color="tertiary" [routerLink]="['/dashboard/colegios/crear-colegio']">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
-</ion-fab>

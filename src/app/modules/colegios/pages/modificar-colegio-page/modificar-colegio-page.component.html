@@ -7,7 +7,18 @@
           <ion-card-header>
             <!-- <ion-card-subtitle>Colegios</ion-card-subtitle> -->
             <ion-card-title>
-              Formulario para modificar un colegio
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button routerLink="/dashboard/colegios/listar-colegios">
+                        <ion-icon slot="start" color="dark" name="chevron-back-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>
+                  <div class="ion-text-wrap">
+                    Formulario para modificar un colegio
+                  </div>
+                </ion-title>
+            </ion-toolbar>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
@@ -60,8 +71,8 @@
                     <ion-item>
                       <ion-select formControlName="dependencia" justify="space-between" labelPlacement="stacked"
                         label="Dependencia *" placeholder="Seleccione Dependencia">
-                        <ion-select-option value="fiscal">Fiscal</ion-select-option>
-                        <ion-select-option value="privado">Privado</ion-select-option>
+                        <ion-select-option value="FISCAL">Fiscal</ion-select-option>
+                        <ion-select-option value="PRIVADO" disabled>Privado</ion-select-option>
                       </ion-select>
                     </ion-item>
 
@@ -70,9 +81,9 @@
                     <ion-item>
                       <ion-select [multiple]="true" formControlName="niveles" justify="space-between"
                         labelPlacement="stacked" label="Nivel *" placeholder="Seleccione Niveles">
-                        <ion-select-option value="inicial">Inicial</ion-select-option>
-                        <ion-select-option value="primaria">Primaria</ion-select-option>
-                        <ion-select-option value="secundaria">Secundaria</ion-select-option>
+                        <ion-select-option value="INICIAL">Inicial</ion-select-option>
+                        <ion-select-option value="PRIMARIA">Primaria</ion-select-option>
+                        <ion-select-option value="SECUNDARIA">Secundaria</ion-select-option>
                       </ion-select>
                     </ion-item>
 
@@ -84,7 +95,7 @@
                   </ion-col>
                 </ion-row>
                 <!-- tercera y cuarta fila  -->
-                <ion-row>
+                <ion-row formGroupName="ubicacion">
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
                     <ion-item lines="none">
                       <ion-input label="Calle *" [errorText]="calle_Error" labelPlacement="stacked" type="text"
@@ -103,7 +114,7 @@
                     <ion-item>
                       <ion-select justify="space-between" labelPlacement="stacked" label="Ciudad *"
                         placeholder="Seleccione Ciudad" formControlName="ciudad">
-                        <ion-select-option value="tarija">Tarija</ion-select-option>
+                        <ion-select-option value="TARIJA">Tarija</ion-select-option>
                       </ion-select>
                     </ion-item>
                   </ion-col>
@@ -118,8 +129,8 @@
                     <ion-item>
                       <ion-select justify="space-between" labelPlacement="stacked" label="Area Geografica *"
                         placeholder="Area Geografica" formControlName="ageografica">
-                        <ion-select-option value="urbana">Urbana</ion-select-option>
-                        <ion-select-option value="rural">Rural</ion-select-option>
+                        <ion-select-option value="URBANO">Urbano</ion-select-option>
+                        <ion-select-option value="RURAL" disabled>Rural</ion-select-option>
                       </ion-select>
                     </ion-item>
                   </ion-col>
@@ -127,14 +138,11 @@
                     <ion-item lines="none">
                       <ion-input label="Coordenadas *" labelPlacement="stacked" type="text"
                         formControlName="coordenadas" [errorText]="coordenadas_Error"
-                        helperText="Seleccione ubicacion en el mapa">
+                        helperText="Seleccione ubicacion en el mapa" readonly>
                       </ion-input>
-                      <!-- <ion-button color="primary" slot="end" (click)="abrirMapa()">
-                        abrir mapa
-                      </ion-button> -->
-                      <ion-chip slot="end" (click)="abrirMapa()" color="primary" mode="md" outline="false">
-                        <ion-label>ABRIR MAPA</ion-label>
-                      </ion-chip>
+                      <ion-button color="primary" fill="outline" slot="end" (click)="abrirMapa()">
+                        <ion-icon name="map-outline"></ion-icon>
+                      </ion-button>
                     </ion-item>
                   </ion-col>
                 </ion-row>
@@ -144,7 +152,7 @@
                   </ion-col>
                 </ion-row>
                 <!-- quinta fila -->
-                <ion-row>
+                <ion-row formGroupName="contacto">
                   <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
                     <ion-item lines="none">
                       <ion-input [errorText]="telefono_Error" label="Telefono Fijo" labelPlacement="stacked"
@@ -173,7 +181,7 @@
                 <ion-row>
                   <ion-col size="12">
                     <ion-button [disabled]="formAdd.invalid" color="primary" (click)="update()">
-                     Salvar cambios
+                     Actualizar
                     </ion-button>
                   </ion-col>
                 </ion-row>
