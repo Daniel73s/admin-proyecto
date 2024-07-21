@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ProveedoresService } from './services/proveedores.service';
 import { Proveedor } from 'src/app/helpers/interfaces/proveedor.interface';
 import { Router } from '@angular/router';
+import { CreateUsuarioComponent } from './modals/create-usuario/create-usuario.component';
+import { UpdatePassComponent } from './modals/update-pass/update-pass.component';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UpdateImgComponent } from './modals/update-img/update-img.component';
 
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.page.html',
   styleUrls: ['./proveedores.page.scss'],
 })
-export class ProveedoresPage implements OnInit {
+export class ProveedoresPage {
 
   constructor(private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private _Proveedores: ProveedoresService,
-    private route: Router) { }
+    private _usuarios: UsuariosService,
+    private route: Router,
+    private modalCtrl: ModalController) { }
 
   private loading: any;
   public texto: string = '';
   public Arrproveedores: Proveedor[] = [];
-  ngOnInit() {
+  ionViewWillEnter() {
     this.solicitarProveedores();
   }
 
   public buscar(e: any) {
-    console.log(e.target.value);
     this.texto = e.target.value;
   }
 
@@ -33,28 +38,27 @@ export class ProveedoresPage implements OnInit {
     if (e.detail.value === 'todos') {
       this.solicitarProveedores();
     } else {
-      this._Proveedores.getProveedores().then(proveedores => {
-        this.Arrproveedores = proveedores.filter(proveedor => {
-          return proveedor.estado == e.detail.value
-        })
-      })
+      this._Proveedores.getProveedores().then((proveedores: any) => {
+        this.Arrproveedores = proveedores.filter((pro: any) => {
+          return pro.estado === e.detail.value
+        });
+      });
     }
-
   }
 
   private solicitarProveedores() {
-    this._Proveedores.getProveedores().then((proveedores: Proveedor[]) => {
+    this._Proveedores.getProveedores().then((proveedores: any) => {
       this.Arrproveedores = proveedores;
     }).catch(error => {
       console.log(error.message);
     });
   }
 
-  async presentAlertConfirm(accion: string) {
-    const btnText = accion === 'activo' ? "Habilitar" : "Eliminar";
-    const message = accion === 'activo' ? "¿ Decea habilitar proveedor ?" : "¿ Decea eliminar proveedor ?";
+  async AlertConfirm(id: string, accion: string) {
+    const titulo = (accion === 'activo') ? "Habilitar" : "Eliminar";
+    const message = (accion === 'activo') ? "¿ Esta seguro de habilitar proveedor ?" : "¿ Esta seguro de eliminar proveedor ?";
     const alert = await this.alertCtrl.create({
-      header: 'Mensaje',
+      header: titulo,
       message,
       buttons: [
         {
@@ -64,13 +68,14 @@ export class ProveedoresPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: btnText,
+          text: "Aceptar",
           handler: () => {
-            this.presentLoading(accion);
-            setTimeout(() => {
-              this.loading.dismiss();
-              this.mensaje(2000, 'Se realizo la accion correctamente', 'checkmark-outline', 'top');
-            }, (2000));
+            //Realizar la accion para cambiar de estado al proveedor
+            console.log(id, accion);
+            this._Proveedores.updateEstado(id, accion).then((resp: any) => {
+              this.mensaje(2000, resp.mensaje, 'checkmark-outline', "top");
+              this.solicitarProveedores();
+            });
           }
         }
       ]
@@ -98,9 +103,9 @@ export class ProveedoresPage implements OnInit {
     toast.present();
   }
 
-  async presentCS() {
+  async presentCS(id: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Mensaje',
+      header: 'Presentar',
       message: '¿ Se presento el certificado sanitario correspondiente ?',
       buttons: [
         {
@@ -113,12 +118,10 @@ export class ProveedoresPage implements OnInit {
         }, {
           text: 'Presentar',
           handler: () => {
-            console.log('Confirm Okay');
-            this.presentLoading('Procesando');
-            setTimeout(() => {
-              this.loading.dismiss();
-              this.mensaje(2000, 'Se presento el certificado correspondiente', 'document-text-outline', 'top');
-            }, (2000));
+            this._Proveedores.updateCS(id, 'valido').then((resp: any) => {
+              this.mensaje(2000, resp.mensaje, 'checkmark-outline', "top");
+              this.solicitarProveedores();
+            });
           }
         }
       ]
@@ -133,5 +136,91 @@ export class ProveedoresPage implements OnInit {
 
   public detalleProveedor(id: string) {
     this.route.navigate([`/dashboard/proveedores/detalle-proveedor/${id}`]);
+  }
+
+  public async createUsuarioModal(id_proveedor: string) {
+    const modal = await this.modalCtrl.create({
+      component: CreateUsuarioComponent,
+      componentProps: {
+        id_proveedor
+      },
+      backdropDismiss: false
+    })
+    await modal.present();
+    const resp = await modal.onDidDismiss();
+    if (resp.data == 'success') {
+      this.solicitarProveedores();
+    }
+  }
+
+  public async updatePassModal(usuario: string) {
+    const modal = await this.modalCtrl.create({
+      component: UpdatePassComponent,
+      componentProps: {
+        usuario
+      },
+      backdropDismiss: false
+    })
+    await modal.present();
+    const resp = await modal.onDidDismiss();
+    if (resp.data == 'success') {
+      this.solicitarProveedores();
+    }
+  }
+
+  public async modEstadoUsuario(usuario: string, estado: string) {
+    const titulo = (estado == 'activo') ? 'Habilitar' : 'Deshabilitar';
+    const message = (estado == 'activo') ? '¿Esta seguro de habilitar usuario?' : '¿Esta seguro de deshabilitar usuario?';
+    const alert = await this.alertCtrl.create({
+      header: titulo,
+      message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this._usuarios.updateEstadoUsuario(usuario, estado).then((resp: any) => {
+              this.mensaje(2000, resp.mensaje, 'checkmark-outline', 'top');
+              this.solicitarProveedores();
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async updateImgModal(id_proveedor:string,imagen: string) {
+    const modal = await this.modalCtrl.create({
+      component: UpdateImgComponent,
+      backdropDismiss:false,
+      cssClass:'modal-css-mod-image',
+      componentProps: {
+        id_imagen: this.getIdImage(imagen),
+        url: imagen,
+        id_proveedor
+      },
+      mode:'md',
+      animated:true
+      
+    });
+    await modal.present();
+    const resp = await modal.onDidDismiss();
+    if (resp.data=='success') {
+      this.solicitarProveedores();
+    }
+  }
+
+  private getIdImage(url:string):string{
+    const arrimagen=url.split('/');
+    const nameimage=arrimagen[arrimagen.length-1];
+    const [id]=nameimage.split('.');
+    return id
   }
 }

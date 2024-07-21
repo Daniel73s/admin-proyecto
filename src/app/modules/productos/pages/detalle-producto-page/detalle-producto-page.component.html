@@ -8,11 +8,11 @@
                         <ion-card-title>
                             <ion-toolbar>
                                 <ion-buttons slot="start">
-                                    <ion-button routerLink="/dashboard/productos">
-                                        <ion-icon slot="start" name="chevron-back-outline" ></ion-icon>
+                                    <ion-button routerLink="/dashboard/productos/listar-productos">
+                                        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
                                     </ion-button>
                                 </ion-buttons>
-                                <ion-title>Informacion sobre el Producto</ion-title>
+                                <ion-title>Detalle del producto</ion-title>
                             </ion-toolbar>
                         </ion-card-title>
                     </ion-card-header>
@@ -31,40 +31,59 @@
                                         <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="6">
                                             <ion-item>
                                                 <ion-input label="Precio Unitario" type="text"
-                                                    [value]="producto.precioUnitario" labelPlacement="stacked" readonly>
+                                                    [value]="producto.precio_unitario+' Bs'" labelPlacement="stacked" readonly>
                                                 </ion-input>
                                             </ion-item>
                                         </ion-col>
                                     </ion-row>
                                     <ion-row>
-                                        <ion-col size="12">
+                                        <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" >
                                             <ion-item>
-                                                <ion-input label="Tipo" type="text" [value]="producto.tipo"
+                                                <ion-input label="Tipo" type="text" [value]="producto.tipo | uppercase"
+                                                    labelPlacement="stacked" readonly>
+                                                </ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                        <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" >
+                                            <ion-item>
+                                                <ion-input label="Categoria" type="text" [value]="producto.categoria"
+                                                    labelPlacement="stacked" readonly>
+                                                </ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                        <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" >
+                                            <ion-item>
+                                                <ion-input label="Estado" type="text" [value]="producto.estado | uppercase"
                                                     labelPlacement="stacked" readonly>
                                                 </ion-input>
                                             </ion-item>
                                         </ion-col>
                                     </ion-row>
                                     <ion-row>
-                                        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                                        <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" >
                                             <ion-item>
-                                                <ion-textarea rows="2" label="Detalle" type="text"
-                                                    labelPlacement="stacked" readonly
-                                                    [value]="producto.detalle"></ion-textarea>
+                                                <ion-input label="Medida" type="text" [value]="producto.medida+' '+producto.unidad_medida"
+                                                    labelPlacement="stacked" readonly>
+                                                </ion-input>
                                             </ion-item>
                                         </ion-col>
-                                        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                                        <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" >
                                             <ion-item>
-                                                <ion-textarea rows="10" label="Ingredientes" type="text"
-                                                    labelPlacement="stacked" readonly
-                                                    [value]="producto.ingredientes"></ion-textarea>
+                                                <ion-input label="Proveedor" type="text" [value]="producto.proveedor"
+                                                    labelPlacement="stacked" readonly>
+                                                </ion-input>
+                                                <ion-button fill="clear" slot="end" (click)="verProveedor(producto.id_proveedor)">
+                                                    <ion-icon slot="icon-only" name="open-outline"></ion-icon>
+                                                </ion-button>
                                             </ion-item>
                                         </ion-col>
+                                    </ion-row>
+                                    <ion-row>
                                         <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
                                             <ion-item>
-                                                <ion-textarea rows="3" label="Comentarios Adicionales" type="text"
+                                                <ion-textarea rows="2" label="Descripcion" type="text"
                                                     labelPlacement="stacked" readonly
-                                                    [value]="producto.comentariosAdicionales"></ion-textarea>
+                                                    [value]="producto.descripcion"></ion-textarea>
                                             </ion-item>
                                         </ion-col>
                                     </ion-row>

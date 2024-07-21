@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
 import { DetalleColegioPageComponent } from './pages/detalle-colegio-page/detalle-colegio-page.component';
 import { DetalleMapModalComponent } from './modals/detalle-map-modal/detalle-map-modal.component';
+import { CreateUsuarioComponent } from './modals/create-usuario/create-usuario.component';
+import { UpdatePassComponent } from './modals/update-pass/update-pass.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import { DetalleMapModalComponent } from './modals/detalle-map-modal/detalle-map
     MapaModalComponent,
     ModificarColegioPageComponent,
     DetalleColegioPageComponent,
-    DetalleMapModalComponent]
+    DetalleMapModalComponent,
+    CreateUsuarioComponent,
+    UpdatePassComponent]
 })
 export class ColegiosPageModule { }

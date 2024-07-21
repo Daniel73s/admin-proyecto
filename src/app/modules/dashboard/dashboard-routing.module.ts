@@ -19,7 +19,22 @@ const routes: Routes = [
     path: 'proveedores',
     loadChildren: () => import('../proveedores/proveedores.module').then(m => m.ProveedoresPageModule)
   },
-
+  {
+    path:'pedidos',
+    loadChildren:()=> import('../pedidos/pedidos.module').then(m=>m.PedidosModule)
+  },
+  {
+    path:'categorias',
+    loadChildren:()=> import('../categorias/categorias.module').then(m=>m.CategoriasModule)
+  },
+  {
+    path:'reportes',
+    loadChildren:()=> import('../reportes/reportes.module').then(m=>m.ReportesModule)
+  },
+  {
+    path:'administradores',
+    loadChildren:()=> import('../adms/adms.module').then(m=>m.AdmsModule)
+  },
   {
     path: '',
     redirectTo: 'inicio',

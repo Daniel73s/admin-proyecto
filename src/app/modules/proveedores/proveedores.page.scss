@@ -47,6 +47,16 @@
     }
   }
 
+  .table tbody tr:hover{
+    background-color: var(--ion-color-light);
+  }
   
-  
-  
+  .text-danger{
+    color: var(--ion-color-danger);
+  }
+  .btn-update-pass{
+    cursor: pointer;
+  }
+  .user-deshabilitado{
+    text-decoration: line-through;
+  }

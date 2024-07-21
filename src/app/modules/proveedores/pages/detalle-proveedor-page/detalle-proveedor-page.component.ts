@@ -10,46 +10,20 @@ import { ProveedoresService } from '../../services/proveedores.service';
   styleUrls: ['./detalle-proveedor-page.component.scss'],
 })
 export class DetalleProveedorPageComponent  implements OnInit {
-   public proveedor:FormGroup=new FormGroup('');
+  public proveedor:any;
   constructor(private route:ActivatedRoute,private fb:FormBuilder,private _proveedores:ProveedoresService) { }
 
   ngOnInit() {
+    //capturando el id que se mando desde la pantalla de proveedores
     const id = this.route.snapshot.paramMap.get('id');
-    this.formInit();
-    this.formpatch(id);
+    this.getProveedor(id!)
   }
 
-  private formInit() {
-    this.proveedor = this.fb.group({
-      razonsocial: [''],
-      nit: [''],
-      limite: [''],
-      cs: [''],
-      telefonoFijo: [''],
-      celular: [''],
-      zona: [''],
-      calle: [''],
-      numero: ['']
+
+  private getProveedor(id:string){
+    this._proveedores.getOneProveedor(id).then((resp:any)=>{
+      this.proveedor=resp;
     });
   }
 
-
-  private async formpatch(id:string | null) {
-    const data = await this._proveedores.getProveedores();
-    const proveedor = data.find(item => {
-      return item.id===id
-    });
-
-    this.proveedor.patchValue({
-      razonsocial: proveedor?.razonSocial,
-      nit: proveedor?.nit ,
-      limite: proveedor?.limite,
-      cs: proveedor?.cs,
-      telefonoFijo: proveedor?.telefonoFijo,
-      celular:proveedor?.celular,
-      zona: proveedor?.zona,
-      calle: proveedor?.calle,
-      numero: proveedor?.numero
-    })
-  }
 }

@@ -27,55 +27,55 @@ export class ModificarProveedorPageComponent implements OnInit {
     private _proveedores: ProveedoresService,
     private route:ActivatedRoute) { }
   public readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
-
+  private id:any;
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    this.id= this.route.snapshot.paramMap.get('id');
     this.formInit();
-    this.formpatch(id);
+    this.getProveedor(this.id);
   }
 
   private formInit() {
     this.formmodProveedor = this.fb.group({
-      razonsocial: ['', [Validators.required]],
+      razon_social: ['', [Validators.required]],
       nit: ['', [Validators.pattern(this.numberRegex)]],
-      limite: ['', [Validators.required, Validators.pattern(this.numberRegex)]],
-      cs: ['', [Validators.required]],
-      telefonoFijo: [''],
+      limite_entregas: ['', [Validators.required, Validators.pattern(this.numberRegex)]],
+      certificado_sanitario: ['', [Validators.required]],
       celular: ['', [Validators.required]],
       zona: ['', [Validators.required]],
       calle: [''],
-      numero: ['']
+      referencia: ['']
     });
   }
 
   public update() {
-    console.log(this.formmodProveedor.getRawValue());
-    this.presentLoading('Actualizando Proveedor');
-    setTimeout(() => {
-      this.loading.dismiss();
-      this.mensaje(2000, 'Se actualizo el proveedor correctamente', 'checkmark-outline', 'top')
-      this.router.navigate(['/dashboard/proveedores']);
-    }, 2000);
-
+    const {razon_social,nit,limite_entregas,certificado_sanitario,celular,zona,calle,referencia}=this.formmodProveedor.getRawValue();
+    this._proveedores.updateProveedor(this.id,{razon_social,nit,limite_entregas,certificado_sanitario,celular}).then(()=>{
+      this._proveedores.updateUbicacionProveedor(this.id,{zona,calle,referencia}).then((resp:any)=>{
+        this.mensaje(2000,resp.mensaje,'checkmark-outline','top');
+        this.router.navigate(['/dashboard/proveedores/listar-proveedores']);
+      }).catch(e =>{
+        console.log(e.message);
+        this.mensaje(2000,'ocurrio un error inesperado','warning-outline','top');
+      });
+    }).catch(e =>{
+      console.log(e.message);
+      this.mensaje(2000,'ocurrio un error inesperado','warning-outline','top');
+    });
   }
 
-  private async formpatch(id:string | null) {
-    const data = await this._proveedores.getProveedores();
-    const proveedor = data.find(item => {
-      return item.id===id
+  private getProveedor(id:string){
+    this._proveedores.getOneProveedor(id).then((resp:any)=>{
+      this.formmodProveedor.patchValue({
+            razon_social: resp.razon_social,
+            nit: resp.nit,
+            limite_entregas: resp.limite_entregas,
+            certificado_sanitario: resp.certificado_sanitario,
+            celular:resp.celular,
+            zona: resp.zona,
+            calle: resp.calle,
+            referencia: resp.referencia
+          });
     });
-
-    this.formmodProveedor.patchValue({
-      razonsocial: proveedor?.razonSocial,
-      nit: proveedor?.nit,
-      limite: proveedor?.limite,
-      cs: proveedor?.cs,
-      telefonoFijo: proveedor?.telefonoFijo,
-      celular:proveedor?.celular,
-      zona: proveedor?.zona,
-      calle: proveedor?.calle,
-      numero: proveedor?.numero
-    })
   }
 
   async presentLoading(message: string) {

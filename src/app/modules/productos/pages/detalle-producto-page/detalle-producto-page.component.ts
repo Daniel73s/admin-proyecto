@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Producto } from 'src/app/helpers/interfaces/producto.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 
 
@@ -11,18 +10,23 @@ import { ProductosService } from '../../services/productos.service';
 })
 export class DetalleProductoPageComponent  implements OnInit {
 public producto:any;
-  constructor(private readonly route: ActivatedRoute,private _productos:ProductosService) { }
+  constructor(private readonly route: ActivatedRoute,
+    private _productos:ProductosService,
+  private router:Router) { }
 
   ngOnInit() {
     // Obtiene el valor del parámetro de ruta `id`
     const id= this.route.snapshot.paramMap.get('id');
-    this.getProducto(id)
+    this.getProducto(id!)
   }
-  private getProducto(id:string | null){
-    this._productos.getProductos().then((items:Producto[])=>{
-      this.producto=items.find((item:Producto)=>{
-        return item.id===id
-      });
+  private getProducto(id:string){
+    this._productos.detalleProducto(id).then((resp:any)=>{
+      console.log(resp);
+      this.producto=resp
     });
+  }
+
+  public verProveedor(id:string){
+      this.router.navigate([`/dashboard/proveedores/detalle-proveedor`,id]);
   }
 }

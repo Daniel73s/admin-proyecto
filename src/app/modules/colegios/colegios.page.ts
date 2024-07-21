@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ColegiosService } from './services/colegios.service';
 import { Router } from '@angular/router';
+import { CreateUsuarioComponent } from './modals/create-usuario/create-usuario.component';
+import { UpdatePassComponent } from './modals/update-pass/update-pass.component';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-colegios',
@@ -11,12 +14,11 @@ import { Router } from '@angular/router';
 export class ColegiosPage {
 
   constructor(private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private _colegios: ColegiosService,
     private router: Router,
-    private modalCtrl: ModalController) { }
-  private loading: any;
+    private modalCtrl: ModalController,
+    private _usuarios: UsuariosService) { }
   public arr_colegios: any[] = [];
   public load: boolean = true;
   public textobuscar: string = '';
@@ -28,7 +30,7 @@ export class ColegiosPage {
     this.colegios();
   }
 
-  buscar(e: any) {
+  public buscar(e: any) {
     this.textobuscar = e.detail.value;
   }
 
@@ -71,21 +73,17 @@ export class ColegiosPage {
         }, {
           text: accion,
           handler: () => {
-            this.presentLoading();
             if (accion === 'baja') {
               this._colegios.deleteColegio(id).then((resp: any) => {
                 this.mensaje(2000, resp.msg, 'checkmark-outline', 'top');
-                this.colegios();
               }).finally(() => {
-                this.loading.dismiss();
+                this.colegios();
               });
             } else {
-              console.log('ejecutar funcoin de habilitar');
               this._colegios.habilitarColegio(id).then((resp: any) => {
                 this.mensaje(2000, resp.msg, 'checkmark-outline', 'top');
-                this.colegios();
               }).finally(() => {
-                this.loading.dismiss();
+                this.colegios();
               });
             }
           }
@@ -94,14 +92,6 @@ export class ColegiosPage {
     });
 
     await alert.present();
-  }
-
-  async presentLoading() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'Procesando baja',
-      spinner: 'dots'
-    });
-    await this.loading.present();
   }
 
   async mensaje(duration: number, message: string, icon: string, position: 'top' | 'bottom') {
@@ -118,7 +108,69 @@ export class ColegiosPage {
     this.router.navigate([`/dashboard/colegios/modificar-colegio/${id}`])
   }
 
-  public detalle_colegio(id:string) {
-     this.router.navigate([`/dashboard/colegios/informacion-colegio/${id}`]);
+  public detalle_colegio(id: string) {
+    this.router.navigate([`/dashboard/colegios/informacion-colegio/${id}`]);
   }
+
+  public async addUsuario(id_colegio: string) {
+    const modal = await this.modalCtrl.create({
+      component: CreateUsuarioComponent,
+      componentProps: {
+        id_colegio
+      },
+      backdropDismiss: false
+    });
+    await modal.present();
+    const resp = await modal.onDidDismiss();
+    if (resp.data == 'success') {
+      this.colegios();
+    }
+  }
+
+  public async updatepass(usuario: string) {
+    const modal = await this.modalCtrl.create({
+      component: UpdatePassComponent,
+      componentProps: {
+        usuario
+      },
+      backdropDismiss: false
+    });
+    await modal.present();
+    const resp = await modal.onDidDismiss();
+    if (resp.data == 'success') {
+      this.colegios();
+    }
+  }
+
+  public async modEstadoUsuario(usuario: string, estado: string) {
+    const titulo = (estado == 'activo') ? 'Habilitar' : 'Deshabilitar';
+    const message = (estado == 'activo') ? '¿Esta seguro de habilitar usuario?' : '¿Esta seguro de deshabilitar usuario?';
+    const alert = await this.alertCtrl.create({
+      header: titulo,
+      message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            console.log(usuario, estado);
+            this._usuarios.updateEstadoUsuario(usuario,estado).then((resp:any)=>{
+              this.mensaje(2000,resp.mensaje,'checkmark-outline','top');
+              this.colegios();
+            })
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
 }

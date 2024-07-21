@@ -11,6 +11,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ModificarProductoPageComponent } from './pages/modificar-producto-page/modificar-producto-page.component';
 import { DetalleProductoPageComponent } from './pages/detalle-producto-page/detalle-producto-page.component';
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
+import { CreateProductoPageComponent } from './pages/create-producto-page/create-producto-page.component';
+import { ModImageComponent } from './modals/mod-image/mod-image.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +23,10 @@ import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
     ReactiveFormsModule,
     PipesModule
   ],
-  declarations: [ProductosPage,ModificarProductoPageComponent,DetalleProductoPageComponent]
+  declarations: [ProductosPage,
+    ModificarProductoPageComponent,
+    DetalleProductoPageComponent,
+    CreateProductoPageComponent,
+    ModImageComponent]
 })
 export class ProductosPageModule {}

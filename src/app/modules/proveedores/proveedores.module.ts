@@ -13,6 +13,10 @@ import { MaskitoModule } from '@maskito/angular';
 import { ModificarProveedorPageComponent } from './pages/modificar-proveedor-page/modificar-proveedor-page.component';
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
 import { DetalleProveedorPageComponent } from './pages/detalle-proveedor-page/detalle-proveedor-page.component';
+import { CreateUsuarioComponent } from './modals/create-usuario/create-usuario.component';
+import { UpdatePassComponent } from './modals/update-pass/update-pass.component';
+import { UpdateImgComponent } from './modals/update-img/update-img.component';
+import { UploadImgComponent } from './modals/upload-img/upload-img.component';
 
 @NgModule({
   imports: [
@@ -25,6 +29,13 @@ import { DetalleProveedorPageComponent } from './pages/detalle-proveedor-page/de
     ReactiveFormsModule,
     PipesModule
   ],
-  declarations: [ProveedoresPage,CrearProveedorPageComponent,ModificarProveedorPageComponent,DetalleProveedorPageComponent]
+  declarations: [ProveedoresPage,
+    CrearProveedorPageComponent,
+    ModificarProveedorPageComponent,
+    DetalleProveedorPageComponent,
+    CreateUsuarioComponent,
+    UpdatePassComponent,
+    UpdateImgComponent,
+  UploadImgComponent]
 })
-export class ProveedoresPageModule {}
+export class ProveedoresPageModule { }

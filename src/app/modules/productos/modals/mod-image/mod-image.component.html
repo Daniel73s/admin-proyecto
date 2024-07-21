@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Actualizar imagen</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <div class="fullscreen-overlay">
+    <ion-spinner name="crescent" color="light"></ion-spinner>
+  </div> -->
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+          <div class="image-box">
+            <img [src]="url" alt="Selected Image" />
+            <label class="custom-file-input">
+              Seleccionar Imagen
+              <input type="file" (change)="handleFileChange($event)" />
+            </label>
+          </div>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" style="display: flex; justify-content: end;">
+        <ion-button (click)="onUpload()" [disabled]="!selectedFile">
+          Aceptar
+        </ion-button>
+        <ion-button (click)="close()" color="medium" fill="clear">
+         cancelar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

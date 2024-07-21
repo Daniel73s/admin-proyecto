@@ -11,6 +11,7 @@
               <div>
                 <ion-searchbar placeholder="Buscar Productos" (ionInput)="buscar($event)" [debounce]="200"></ion-searchbar>
               </div>
+              
               <ion-segment 	scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
                 <ion-segment-button value="todos">
                   <ion-label>Todos</ion-label>
@@ -22,7 +23,16 @@
                   <ion-label>Inactivos</ion-label>
                 </ion-segment-button>
               </ion-segment>
+              <ion-list>
+                <ion-item>
+                  <ion-select value="todos" (ionChange)="filtrarPorProveedor($event)">
+                    <ion-select-option value="todos">Todos los proveedores</ion-select-option>
+                    <ion-select-option *ngFor="let proveedor of listaProveedores" [value]="proveedor.id_proveedor">{{proveedor.razon_social}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
             </div>
+          
           </ion-card-header>
           <ion-card-content>
             <div class="responsive">
@@ -35,10 +45,10 @@
                         <span style="margin-left: 30px;">Producto</span>
                      </div>
                     </th>
-                    <th class="ion-text-center">Tipo</th>
-                    <th class="ion-text-center">Stock</th>
-                    <th class="ion-text-center">Precio Unitario</th>
+                    <th class="ion-text-center">P.U</th>
+                    <th class="ion-text-center">Medida</th>
                     <th class="ion-text-center">Estado</th>
+                    <th class="ion-text-center">Proveedor</th>
                     <th class="ion-text-center">Acciones</th>
                   </tr>
                 </thead>
@@ -47,36 +57,47 @@
                     <td>{{i+1}}</td>
                     <td>
                       <ion-item lines="none">
-                        <ion-thumbnail slot="start">
+                        <ion-thumbnail slot="start" class="img_thumbnail">
                           <img [src]="producto.imagen" />
                         </ion-thumbnail>
                         <ion-label>
                           <h3>{{producto.nombre |uppercase}}</h3>
-                          <p>{{producto.detalle}}</p>
+                          <ion-button (click)="openModalUpdateImage(producto.id_producto,producto.imagen)" color="primary" size="small" fill="clear">
+                           cambiar imagen
+                           <ion-icon slot="start" name="image-outline"></ion-icon>
+                          </ion-button>
                         </ion-label>
                       </ion-item>
                     </td>
-                    <td class="ion-text-center">{{producto.tipo | uppercase}}</td>
-                    <td class="ion-text-center">{{producto.stock}} Uni.</td>
-                    <td class="ion-text-center">{{producto.precioUnitario}} Bs</td>
+                    <td class="ion-text-center">{{producto.precio_unitario}} Bs</td>
+                    <td class="ion-text-center">{{producto.medida}} {{producto.unidad_medida}}</td>
                     <td class="ion-text-center">
-                      <ion-badge *ngIf="producto.estado==='activo'" color="success" mode="ios">Activo</ion-badge>
-                      <ion-badge *ngIf="producto.estado==='inactivo'"  color="warning" mode="ios">Inactivo</ion-badge>
+                      <ion-badge [color]="producto.estado==='activo'?'success':'warning'" mode="ios">{{producto.estado==='activo'?'Activo':'Inactivo'}}</ion-badge>
+                    </td>
+                    <td class="ion-text-center">
+                      <ion-chip (click)="detalle_proveedor(producto.id_proveedor)">
+                        <ion-avatar>
+                          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </ion-avatar>
+                        <ion-label>
+                          <small>{{producto.razon_social}}</small>
+                        </ion-label>
+                      </ion-chip>                    
                     </td>
                     <td>
                       <div class="content-center">
-                        <ion-button  color="primary" fill="clear" title="Modificar Producto" (click)="updateForm(producto.id)">
+                        <ion-button  color="primary" fill="clear" title="Modificar Producto" (click)="updateForm(producto.id_producto)">
                           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                         </ion-button>
                         <!-- boton eliminar (eliminado logico) -->
-                        <ion-button *ngIf="producto.estado==='activo'" (click)="presentAlertConfirm('inactivo')"  color="danger" fill="clear">
+                        <ion-button *ngIf="producto.estado==='activo'" (click)="AlertConfirm(producto.id_producto,'inactivo')"  color="danger" fill="clear">
                           <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
                         </ion-button>
                         <!-- boton reestablecer -->
-                        <ion-button *ngIf="producto.estado==='inactivo'" (click)="presentAlertConfirm('activo')"  color="success" fill="clear">
+                        <ion-button *ngIf="producto.estado==='inactivo'" (click)="AlertConfirm(producto.id_producto,'activo')"  color="success" fill="clear">
                           <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
                         </ion-button>
-                        <ion-button (click)="opendetalles(producto.id)" color="tertiary" fill="clear">
+                        <ion-button (click)="opendetalles(producto.id_producto)" color="tertiary" fill="clear">
                           <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                         </ion-button>
                       </div>

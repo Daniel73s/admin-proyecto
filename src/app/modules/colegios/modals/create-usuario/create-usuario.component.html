@@ -1,0 +1,76 @@
+<ion-content color="">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button (click)="close()" >
+                        <ion-icon slot="start" name="close-outline" ></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Crear Cuenta</ion-title>
+            </ion-toolbar>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formuser" (submit)="crearUsuario()">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <h3><ion-badge color="light" mode="md">Crear cuenta de usuario</ion-badge></h3>
+                  </ion-col>
+                </ion-row>
+                <!-- primera fila -->
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                    <ion-item lines="none">
+                      <ion-input helperText="Ingrese un usuario valido" label="Usuario" type="text"
+                        labelPlacement="stacked" 
+                        [errorText]="Error('usuario')"
+                         maxlength="50"
+                        formControlName="usuario" >
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
+                    <ion-item lines="none">
+                      <ion-input label="Password" labelPlacement="stacked" type="password"
+                        helperText="Ingrese un password seguro que contenga letras numeros y caracteres especiales" 
+                        [errorText]="Error('password')"
+                        maxlength="30"
+                        formControlName="password">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item lines="none">
+                      <ion-input label="Repetir password" labelPlacement="stacked" type="password"
+                        helperText="Asegurate de haber ingresado el password correctamente" 
+                        [errorText]="Error('repeat_password')"
+                        maxlength="30"
+                        formControlName="repeat_password">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <!-- boton del formulario  -->
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-button color="primary" type="submit" [disabled]="formuser.invalid"> 
+                      <!-- [disabled]="formuser.invalid" -->
+                      Crear Usuario
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

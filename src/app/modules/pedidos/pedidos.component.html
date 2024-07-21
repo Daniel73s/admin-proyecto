@@ -1,0 +1,78 @@
+<app-header></app-header>
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <div style="display: flex; justify-content: space-between;align-items: center;">
+              <ion-card-title>Pedidos</ion-card-title>
+              <ion-radio-group value="todos" class="radio-group">
+                <ion-radio value="todos">Todos</ion-radio>
+                <ion-radio value="pendiente">Pendientes</ion-radio>
+                <ion-radio value="enviado">Enviados</ion-radio>
+                <ion-radio value="entregado">Entregados</ion-radio>
+                <ion-radio value="cancelado">Cancelados</ion-radio>
+              </ion-radio-group>
+              <!-- <ion-list>
+                <ion-item>
+                  <ion-select aria-label="Fruit" value="todos" interface="popover" placeholder="Seleccione uno">
+                    <ion-select-option value="todos">Todos</ion-select-option>
+                    <ion-select-option value="pendientes">Pendientes</ion-select-option>
+                    <ion-select-option value="enviados">Enviados</ion-select-option>
+                    <ion-select-option value="entregados">Entregados</ion-select-option>
+                    <ion-select-option value="cancelados">Cancelados</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list> -->
+            </div>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th class="ion-text-center">Codigo</th>
+                    <th class="ion-text-center">Estado</th>
+                    <th class="ion-text-center">Comentarios</th>
+                    <th class="ion-text-center">Fecha</th>
+                    <th class="ion-text-center">Total</th>
+                    <th class="ion-text-center">Colegio</th>
+                    <th class="ion-text-center">Proveedor</th>
+                    <th class="ion-text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pedido of pedidos;let i=index">
+                    <td>{{i+1}}</td>
+                    <td class="ion-text-center">{{pedido.id | slice:1:15}}...</td>
+                    <td class="ion-text-center">
+                      <ion-chip color="medium"
+                      [ngClass]="{'danger': pedido.estado==='cancelado',
+                                  'primary':pedido.estado==='enviado',
+                                  'success':pedido.estado==='entregado',
+                                  'warning':pedido.estado==='pendiente'}">
+                      {{pedido.estado}}
+                    </ion-chip>
+                    </td>
+                    <td class="ion-text-center">{{pedido.comentario}}</td>
+                    <td class="ion-text-center">{{pedido.fechaPedido | date:'mediumDate'}}</td>
+                    <td class="ion-text-center">{{pedido.total | currency:'BOB':'symbol'}}</td>
+                    <td class="ion-text-center">{{pedido.colegio}}</td>
+                    <td class="ion-text-center">{{pedido.proveedor}}</td>
+                    <td>
+                      <ion-button color="primary" fill="clear" title="Detalle Pedido" routerLink="/dashboard/pedidos/detalle-pedido">
+                        <ion-icon slot="icon-only" name="reader-outline"></ion-icon>
+                      </ion-button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

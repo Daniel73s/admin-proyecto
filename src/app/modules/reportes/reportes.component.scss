@@ -1,0 +1,23 @@
+.table{
+    width: 100%;
+}
+.table tbody tr td {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+ion-card{
+    box-shadow: none !important;
+}
+
+ion-datetime-button {
+    margin: 12px;
+  }
+  
+  ion-datetime {
+    --min-height: 500px; /* Ajuste de altura mínima */
+  }
+
+  ion-segment{
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }

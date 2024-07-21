@@ -58,4 +58,8 @@ export class ColegiosService {
   async updateContacto(id:string,contacto: any) {
     return this.http.patch(`${this.url}/updateContacto/${id}`, contacto).toPromise();
   }
+  //asignar un usuario a un colegio
+  async agregarUsuario(id_colegio:string,usuario:string) {
+    return this.http.post(`${this.url}/usuario/${id_colegio}`,{usuario}).toPromise();
+  }
 }

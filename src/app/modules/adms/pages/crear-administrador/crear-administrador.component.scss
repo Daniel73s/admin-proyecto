@@ -1,0 +1,35 @@
+ion-card{
+    box-shadow: none;
+}
+
+.file-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .custom-file-button {
+    padding: 10px 20px;
+    background-color: #3880ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .file-name {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  

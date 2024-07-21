@@ -1,0 +1,76 @@
+<app-header></app-header>
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Administradores</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th class="ion-text-center">foto</th>
+                    <th class="ion-text-center">Nombre completo</th>
+                    <th class="ion-text-center">Celular</th>
+                    <th class="ion-text-center">Usuario</th>
+                    <th class="ion-text-center">Estado Usuario</th>
+                    <th class="ion-text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let admin of listadms;let i=index">
+                    <td>{{i+1}}</td>
+                    <td class="content-img">
+                      <ion-avatar>
+                        <img [src]="admin.imagen" />
+                      </ion-avatar>
+                    </td>
+                    <td class="ion-text-center">{{admin.nombre}} {{admin.ap}} {{admin.am}}</td>
+                    <td class="ion-text-center"><a [href]="'tel:'+admin.celular">{{admin.celular}}</a></td>
+                    <td class="ion-text-center">
+                      <ion-button title="crear usuario" fill="clear" (click)="openmodal(admin.id_admin)" *ngIf="!admin.usuario">
+                        <ion-icon slot="icon-only" name="lock-open-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button fill="clear" *ngIf="admin.usuario" (click)="updatePasswordModal(admin.usuario)" color="dark" title="modificar password">
+                        <!-- {{admin.usuario}} -->
+                         <ion-icon slot="icon-only"name="settings-outline"></ion-icon>
+                      </ion-button>
+                    </td>
+                    <td class="ion-text-center">
+                      <div *ngIf="admin.estadousuario">
+                        <ion-badge *ngIf="admin.estadousuario=='activo'" color="success" mode="ios">Habilitado</ion-badge>
+                        <ion-badge *ngIf="admin.estadousuario=='inactivo'" color="danger" mode="ios">Bloqueado</ion-badge>
+                      </div>
+                      <div *ngIf="!admin.estadousuario">
+                          <!-- <ion-badge color="light" mode="ios">Usuario no asignado</ion-badge> -->
+                          <span>usuario no asignado</span>
+                      </div>
+                    </td>
+                    <td class="ion-text-center">
+                      <ion-button *ngIf="admin.estadousuario=='activo'" color="danger" fill="clear" size="small" title="Deshabilitar cuenta de usuario"
+                        (click)="AlertConfirm(admin.usuario,'inactivo')">
+                        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button *ngIf="admin.estadousuario=='inactivo'" color="success" fill="clear" size="small" title="Deshabilitar cuenta de usuario"
+                        (click)="AlertConfirm(admin.usuario,'activo')">
+                        <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button fill="clear" size="small" (click)="detalleAdministrador(admin.id_admin)">
+                        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+                      </ion-button>
+                      <!-- <span  *ngIf="!admin.estadousuario">no cuenta con usuario</span> -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,156 @@
+<app-header></app-header>
+<ion-content color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button routerLink="/dashboard/administradores/listar_administradores">
+                    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+                <ion-title>Crear nuevo administrador</ion-title>
+              </ion-toolbar>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formAdmin" (submit)="create()">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-list-header>
+                    <ion-label><ion-badge color="light" mode="ios">Informacion Personal</ion-badge></ion-label>
+                  </ion-list-header>
+                </ion-col>
+              </ion-row>
+              <!-- nombre y apellidos -->
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                  <ion-item lines="none">
+                    <ion-input type="text" labelPlacement="stacked" maxlength="50" [counter]="true"  formControlName="nombre">
+                      <div slot="label"> Nombre <ion-text color="danger">(Requerido)</ion-text></div>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                  <ion-item lines="none">
+                    <ion-input label="Apellido Paterno" type="text" labelPlacement="stacked" maxlength="30" [counter]="true"
+                      formControlName="ap">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                  <ion-item lines="none">
+                    <ion-input label="apellido Materno" type="text" labelPlacement="stacked" maxlength="30" [counter]="true"
+                      formControlName="am">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- carnet y coplemento -->
+              <ion-row>
+                <ion-col size-xs="12" size-lg="6">
+                  <ion-item lines="none">
+                    <ion-input type="text" labelPlacement="stacked" [counter]="true" maxlength="10"
+                      formControlName="ci">
+                      <div slot="label"> Carnet de Identidad <ion-text color="danger">(Requerido)</ion-text></div>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-lg="6">
+                  <ion-item lines="none">
+                    <ion-input label="Complemento" type="text" labelPlacement="stacked" [counter]="true" maxlength="5"
+                      formControlName="complemento">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- imagen -->
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item>
+                    <ion-thumbnail slot="start">
+                      <img [src]="url || './assets/img/default.jpg'" />
+                    </ion-thumbnail>
+                    <ion-label></ion-label>
+                    <div class="file-input-container">
+                      <input type="file" (change)="handleFileChange($event)" accept=".jpg, .jpeg, .png" class="file-input" />
+                      <button ion-button type="button" class="custom-file-button">Seleccionar Imagen</button>
+                    </div>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- informacion de domicilio -->
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                  <ion-list>
+                    <ion-list-header>
+                      <ion-label><ion-badge color="light" mode="ios">Informacion de contacto</ion-badge></ion-label>
+                    </ion-list-header>
+                    <ion-item lines="none">
+                      <ion-input type="text" labelPlacement="stacked" [counter]="true" maxlength="50"
+                        formControlName="zona">
+                        <div slot="label"> Zona <ion-text color="danger">(Requerido)</ion-text></div>
+                      </ion-input>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                  <ion-list>
+                    <ion-list-header>
+                      <!-- <ion-label><ion-badge color="tertiary" mode="ios">Informacion de contacto</ion-badge></ion-label> -->
+                    </ion-list-header>
+                    <ion-item lines="none">
+                      <ion-input type="text" labelPlacement="stacked" [counter]="true" maxlength="50"
+                        formControlName="calle">
+                        <div slot="label"> Calle </div>
+                      </ion-input>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-item lines="none">
+                    <ion-textarea [autoGrow]="true" formControlName="referencia" type="text" labelPlacement="stacked" [counter]="true" maxlength="150"><div slot="label"> Referencia <ion-text color="danger">(Requerido)</ion-text> </div></ion-textarea>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- email y numero de celular -->
+              <ion-row>
+                <ion-col size-xs="12" size-lg="6">
+                  <ion-item lines="none">
+                    <ion-input label="Correo Electronico" type="text" labelPlacement="stacked" [counter]="true"
+                      maxlength="50" formControlName="email">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size-xs="12" size-lg="6">
+                  <ion-item lines="none">
+                    <ion-input type="number" labelPlacement="stacked" [counter]="true" maxlength="8"
+                      formControlName="celular">
+                      <div slot="label"> Celular <ion-text color="danger">(Requerido)</ion-text></div>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- botones de aceptar y cancelar -->
+              <ion-row>
+                <ion-col size="12">
+                  <ion-button type="submit" [disabled]="formAdmin.invalid">
+                    Guardar
+                  </ion-button>
+                  <ion-button color="tertiary">
+                    cancelar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

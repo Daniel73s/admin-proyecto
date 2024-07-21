@@ -1,0 +1,143 @@
+<app-header></app-header>
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12" size-lg="7">
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Productos</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th class="ion-text-center">Imagen</th>
+                      <th class="ion-text-center">Nombre</th>
+                      <th class="ion-text-center">P.U</th>
+                      <th class="ion-text-center">Cantidad</th>
+                      <th class="ion-text-center">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let pedido of [1,1];let i = index">
+                      <td class="ion-text-center">{{i+1}}</td>
+                      <td class="center-img">
+                        <ion-thumbnail>
+                          <img src="./assets/img/default.jpg" />
+                        </ion-thumbnail>
+                      </td>
+                      <td class="ion-text-center">Producto {{i+1}}</td>
+                      <td class="ion-text-center">1 Bs</td>
+                      <td class="ion-text-center">500</td>
+                      <td class="ion-text-center">500 Bs</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Total a pagar</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-grid fixed>
+                  <ion-row>
+                    <ion-col size="6">Sub Total</ion-col>
+                    <ion-col size="6" class="ion-text-right">1000 BS</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size="6">Total, a pagar</ion-col>
+                    <ion-col size="6" class="ion-text-right"> 1000 BS</ion-col>
+                  </ion-row>
+                </ion-grid>
+
+
+                <!-- <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Sub Total</td>
+                    <td>523 BS</td>
+                  </tr>
+                  <tr style="border-top: 2px solid grey;">
+                    <td>Total</td>
+                    <td>523 BS</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size-xs="12" size-lg="5">
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="12">
+                <ion-card-header>
+                  <ion-card-title>Informacion del colegio</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-avatar slot="start">
+                    <img src="./assets/img/default.jpg" />
+                  </ion-avatar>
+                  <ion-list>
+                    <ion-item>
+                      <ion-label>
+                        <h3 class="link-like">Colegio Bolivia</h3>
+                        <p>23 Pedidos en total</p>
+                      </ion-label>
+                    </ion-item>
+                    <ion-list-header>
+                      <ion-label>Contacto</ion-label>
+                      <ion-button color="primary">Editar<ion-icon slot="icon-only"
+                          name="create-outline"></ion-icon></ion-button>
+                    </ion-list-header>
+                    <ion-item>
+                      <ion-label>
+                        <p class="link-like">colbolivia@gmail.com</p>
+                        <p>+591 62545875</p>
+                        <p>6663547</p>
+                      </ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-card-content>
+                <ion-card-header>
+                  <ion-card-title>Informacion del Proveedor</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-list>
+                    <ion-item>
+                      <ion-label>
+                        <h2 class="link-like">Proveedor 1</h2>
+                      </ion-label>
+                      <ion-chip color="success" mode="md" slot="end">
+                        <ion-label>Activo</ion-label>
+                      </ion-chip>
+                    </ion-item>
+                    <ion-list-header>
+                      <ion-label>Contacto</ion-label>
+                      <ion-button>Editar <ion-icon slot="icon-only" name="create-outline"></ion-icon></ion-button>
+                    </ion-list-header>
+                    <ion-item>
+                      <ion-label>
+                        <p>+591 62545875</p>
+                      </ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-card-content>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

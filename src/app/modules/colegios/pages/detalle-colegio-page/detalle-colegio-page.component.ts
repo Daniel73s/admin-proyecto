@@ -19,6 +19,8 @@ export class DetalleColegioPageComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this._colegios.getOneColegio(this.id).then((resp: any) => {
+      console.log(resp);
+      
       this.colegio = resp;
     })
   }

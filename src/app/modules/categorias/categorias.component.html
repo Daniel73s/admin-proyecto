@@ -1,0 +1,57 @@
+<app-header></app-header>
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <div class="header">
+            <ion-card-header>
+              <ion-card-title>Categorias</ion-card-title>
+            </ion-card-header>
+            <ion-searchbar (ionInput)="buscar($event)" placeholder="Buscar Categoria" type="text"></ion-searchbar>
+          </div>
+          <ion-card-content>
+            <div class="responsive">
+              <div class="loading_container" *ngIf="!categorias">
+                <ion-spinner color="tertiary" name="circular"></ion-spinner>
+              </div>
+              <table class="table" *ngIf="categorias">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th class="ion-text-center">Nombre</th>
+                    <th class="ion-text-center">Descripcion</th>
+                    <th class="ion-text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let categoria of categorias | filter:texto :'nombre' ; let i=index">
+                    <td>{{i+1}}</td>
+                    <td class="ion-text-center">{{categoria.nombre}}</td>
+                    <td class="content-desciption"> 
+                        <div class="content-desciption">
+                          {{categoria.descripcion }}
+                        </div>
+
+                    </td>
+                    <td class="buttons-accion">
+                      <ion-button (click)="modificar(categoria.id_categoria)" color="primary" fill="clear" title="Modificar">
+                        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button (click)="alertConfirm(categoria.id_categoria,false)" *ngIf="categoria.estado" color="danger" fill="clear" title="Deshabilitar">
+                        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                      </ion-button>
+                      <ion-button (click)="alertConfirm(categoria.id_categoria,true)" *ngIf="!categoria.estado" color="success" fill="clear" title="Habilitar">
+                        <ion-icon slot="icon-only" name="reload-outline"></ion-icon>
+                      </ion-button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

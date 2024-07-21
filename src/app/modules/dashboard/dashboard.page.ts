@@ -46,7 +46,7 @@ export class DashboardPage implements OnInit {
       submenu: [
         {
           title: 'Listar proveedores',
-          path: '/dashboard/proveedores',
+          path: '/dashboard/proveedores/listar-proveedores',
           icon: 'list-outline'
         },
         {
@@ -59,20 +59,78 @@ export class DashboardPage implements OnInit {
     {
       id: 4,
       title: 'Productos',
-      multiple: false,
+      multiple: true,
       open: false,
-      path: '/dashboard/productos',
-      icon: 'fast-food-outline'
+      icon: 'fast-food-outline',
+      submenu: [
+        {
+          title: 'Listar productos',
+          path: '/dashboard/productos/listar-productos',
+          icon: 'list-outline'
+        },
+        {
+          title: 'Crear nuevo producto',
+          path: '/dashboard/productos/crear-producto',
+          icon: 'pencil-outline'
+        }
+      ]
     },
     {
       id: 5,
-      title: 'Informes',
+      title: 'Pedidos',
       multiple: false,
       open: false,
-      path: '/dashboard/informes',
-      icon: 'documents-outline'
+      path: '/dashboard/pedidos',
+      icon: 'cart-outline'
+    },
+    {
+      id: 6,
+      title: 'Categorias',
+      multiple: true,
+      open: false,
+      path: '/dashboard/categorias',
+      icon: 'pricetags-outline',
+      submenu: [
+        {
+          title: 'Categorias',
+          path: '/dashboard/categorias/listar_categorias',
+          icon: 'add-outline'
+        },
+        {
+          title: 'Nueva Categoria',
+          path: '/dashboard/categorias/crear_categoria',
+          icon: 'add-outline'
+        }
+      ],
+    },
+    {
+      id: 7,
+      title: 'Reportes',
+      multiple: false,
+      open: false,
+      path: '/dashboard/reportes',
+      icon: 'document-text-outline'
+    },
+    {
+      id: 8,
+      title: 'Administradores',
+      multiple: true,
+      open: false,
+      path: '/dashboard/administradores',
+      icon: 'people-circle-outline',
+      submenu: [
+        {
+          title: 'Administradores',
+          path: '/dashboard/administradores/listar_administradores',
+          icon: 'add-outline'
+        },
+        {
+          title: 'Nuevo administrador',
+          path: '/dashboard/administradores/nuevo_administrador',
+          icon: 'add-outline'
+        }
+      ],
     }
-
   ]
 
 

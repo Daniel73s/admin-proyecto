@@ -8,7 +8,7 @@ import { DetalleProveedorPageComponent } from './pages/detalle-proveedor-page/de
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'listar-proveedores',
     component: ProveedoresPage
   },
   {
@@ -22,6 +22,11 @@ const routes: Routes = [
   {
     path: 'detalle-proveedor/:id',
     component: DetalleProveedorPageComponent
+  },
+  {
+    path:"**",
+    redirectTo:"listar-proveedores",
+    pathMatch:'full'
   }
 
 ];

@@ -1,0 +1,74 @@
+<app-header></app-header>
+<ion-content [fullscreen]="true" color="light" *ngIf="admin">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card-header>
+          <ion-item lines="none" color="light">
+            <ion-button color="dark" fill="clear" routerLink="/dashboard/administradores/listar_administradores">
+              <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-card-title>Perfil de Administrador</ion-card-title>
+          </ion-item>
+        </ion-card-header>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-avatar style="margin-left: auto; margin-right: auto;">
+              <img [src]="admin.imagen" />
+            </ion-avatar>
+            <ion-label>
+              <h3>{{admin.nombre}} {{admin.ap}} {{admin.am}}</h3>
+              <p>{{admin.rol}}</p>
+              <p *ngIf="!admin.rol" class="text-danger">Administrador no cuenta con usuario</p>
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="8">
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngIf="admin.usuario">
+                <ion-input label="Usuario" labelPlacement="stacked" readonly="true" [value]="admin.usuario"
+                  placeholder="Usuario"></ion-input>
+                  <ion-badge slot="end" [color]="admin.estado=='activo'?'success':'danger'" mode="ios">{{admin.estado=='activo'?'Habilitado':'Bloqueado'}}</ion-badge>
+              </ion-item>
+              <ion-item *ngIf="admin.rol">
+                <ion-input label="Rol" labelPlacement="stacked" readonly="true"
+                  [value]="admin.rol" placeholder="Rol de usuario"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Carnet de identidad" labelPlacement="stacked" readonly="true"
+                  [value]="admin.ci+' '+admin.complemento" placeholder="Carnet de identidad"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Correo Electronico" labelPlacement="stacked" readonly="true" [value]="admin.email || 'no cuenta con correo'"
+                  placeholder="Correo electronico"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Celular" labelPlacement="stacked" readonly="true" [value]="admin.celular"
+                  placeholder="Celular"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Zona" labelPlacement="stacked" readonly="true" [value]="admin.zona"
+                  placeholder="Zona"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Calle" labelPlacement="stacked" readonly="true" [value]="admin.calle || 'S/N'"
+                  placeholder="Calle"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-textarea autoGrow="true" label="Referencia" labelPlacement="stacked" readonly="true" [value]="admin.referencia"
+                  placeholder="Referencia"></ion-textarea>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -42,6 +42,8 @@
                     <th>Estado</th>
                     <th>Zona</th>
                     <th>Estudiantes</th>
+                    <th>Usuario</th>
+                    <th>Estado usuario</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -65,7 +67,27 @@
                       </ion-badge>
                     </td>
                     <td>{{colegio.zona}}</td>
-                    <td>{{colegio.estudiantes}}</td>
+                    <td>
+                      {{colegio.estudiantes}}
+                    </td>
+                    <td>
+                      <a class="btn-updateuser" [ngClass]="colegio.estado_usuario=='inactivo'?'user-deshabilitado':''" (click)="updatepass(colegio.usuario)" *ngIf="colegio.usuario"> {{colegio.usuario}}</a>
+                      <ion-button *ngIf="!colegio.usuario" fill="clear" (click)="addUsuario(colegio.id_colegio)">
+                        <ion-icon slot="icon-only" name="lock-open-outline"></ion-icon>
+                      </ion-button>
+                    </td>
+                    <td>
+                      <ion-chip (click)="modEstadoUsuario(colegio.usuario,'inactivo')" color="danger" *ngIf="colegio.estado_usuario==='activo'" mode="md" outline="false">
+                        <ion-label>Deshabilitar</ion-label>
+                      </ion-chip>
+                      <ion-chip (click)="modEstadoUsuario(colegio.usuario,'activo')" color="success" *ngIf="colegio.estado_usuario==='inactivo'" mode="md" outline="false">
+                        <ion-label>Habilitar</ion-label>
+                      </ion-chip>
+                      <p *ngIf="!colegio.estado_usuario" class="text-danger">
+                        Sin usuario
+                      </p>
+
+                    </td>
                     <td class="content-center">
                       <ion-button color="primary" (click)="updateVentana(colegio.id_colegio)" fill="clear"
                         title="Modificar Colegio">

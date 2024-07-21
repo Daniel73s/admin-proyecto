@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ion-content color="light">
+<ion-content color="light" *ngIf="proveedor">
   <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -8,17 +8,37 @@
             <ion-card-title>
               <ion-toolbar>
                 <ion-buttons slot="start">
-                    <ion-button routerLink="/dashboard/proveedores">
-                        <ion-icon slot="start" name="chevron-back-outline" ></ion-icon>
-                    </ion-button>
+                  <ion-button routerLink="/dashboard/proveedores">
+                    <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+                  </ion-button>
                 </ion-buttons>
-                <ion-title>Formulario para la modificacion del Proveedor</ion-title>
-            </ion-toolbar>
+                <ion-title>Detalles del Proveedor</ion-title>
+                <ion-chip slot="end" color="primary" mode="md" outline="false">
+                  <ion-label>{{proveedor.rol}}</ion-label>
+                </ion-chip>
+              </ion-toolbar>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <form [formGroup]="proveedor">
+            <form>
               <ion-grid>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-text color="medium">
+                      <span style="font-weight: 500;">Cuenta de usuario</span>
+                    </ion-text>
+                    <ion-row>
+                      <ion-col size-lg="12" size-xs="12">
+                        <p *ngIf="!proveedor.usuario" class="text-danger">proveedor no cuenta con un usuario</p>
+                        <ion-item *ngIf="proveedor.usuario">
+                          <ion-input label="Usuario:" [value]="proveedor.usuario"></ion-input>
+                          <ion-badge slot="end" [color]="proveedor.estado_usuario=='activo'?'success':'danger'"
+                            mode="md">{{proveedor.estado_usuario=='activo'?'habilitado':'bloqueado'}}</ion-badge>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
                 <ion-row>
                   <ion-col size="12">
                     <h3><ion-badge color="light" mode="md">Informacion general</ion-badge></h3>
@@ -28,8 +48,8 @@
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-input label="Razon Social" type="text"
-                        labelPlacement="stacked" formControlName="razonsocial" readonly>
+                      <ion-input label="Razon Social" type="text" labelPlacement="stacked"
+                        [value]="proveedor.razon_social" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -37,24 +57,42 @@
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
                       <ion-input label="Nit" labelPlacement="stacked" type="number" maxlength="10"
-                        formControlName="nit" readonly >
+                        [value]="proveedor.nit" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>
-                <!-- segunda fila -->
+
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-input label="Limite" type="text"
-                        labelPlacement="stacked" formControlName="limite" readonly>
+                      <ion-input label="Fecha de creacion" type="text" labelPlacement="stacked"
+                        [value]="proveedor.fecha_creacion" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-input label="Certificado Sanitario" type="text"
-                        labelPlacement="stacked" formControlName="cs" readonly>
+                      <ion-input label="Estado" type="text" labelPlacement="stacked" [value]="proveedor.estado"
+                        readonly>
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <!-- segunda fila -->
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item>
+                      <ion-input label="Limite de entregas" type="text" labelPlacement="stacked"
+                        [value]="proveedor.limite_entregas" readonly>
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                    <ion-item>
+                      <ion-input label="Certificado Sanitario" type="text" labelPlacement="stacked"
+                        [value]="proveedor.certificado_sanitario" readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -66,17 +104,10 @@
                 </ion-row>
                 <!-- tercera fila  -->
                 <ion-row>
-                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
+                  <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
                     <ion-item>
-                      <ion-input label="Telefono Fijo" type="text"
-                        labelPlacement="stacked" formControlName="telefonoFijo" readonly>
-                      </ion-input>
-                    </ion-item>
-                  </ion-col>
-                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
-                    <ion-item>
-                      <ion-input label="Telefono Fijo" type="text"
-                        labelPlacement="stacked" formControlName="celular" readonly>
+                      <ion-input label="Celular" type="text" labelPlacement="stacked" [value]="proveedor.celular"
+                        readonly>
                       </ion-input>
                     </ion-item>
                   </ion-col>
@@ -88,25 +119,26 @@
                 </ion-row>
                 <!-- cuarta fila -->
                 <ion-row>
-                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-input formControlName="zona" readonly label="Zona" labelPlacement="stacked" type="text" maxlength="150">
+                      <ion-input [value]="proveedor.zona" readonly label="Zona" labelPlacement="stacked" type="text"
+                        maxlength="150">
                       </ion-input>
                     </ion-item>
                   </ion-col>
-                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6">
                     <ion-item>
-                      <ion-input formControlName="calle" readonly label="Calle" labelPlacement="stacked" type="text" maxlength="150"
-                        >
+                      <ion-input [value]="proveedor.calle" readonly label="Calle" labelPlacement="stacked" type="text"
+                        maxlength="150">
                       </ion-input>
                     </ion-item>
                   </ion-col>
-                  <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4">
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12">
                     <ion-item>
-                      <ion-input formControlName="numero" label="Numero de domicilio" labelPlacement="stacked" type="text" 
-                      maxlength="50" readonly
-                        >
-                      </ion-input>
+                      <ion-textarea readonly [autoGrow]="true" [value]="proveedor.referencia"
+                        label="Referencia de domicilio" labelPlacement="stacked" type="text"></ion-textarea>
                     </ion-item>
                   </ion-col>
                 </ion-row>

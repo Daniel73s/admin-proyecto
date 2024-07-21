@@ -25,10 +25,6 @@ const routes: Routes = [
     path:'informacion-colegio/:id',
     component:DetalleColegioPageComponent
   },
-  // {
-  //   path:'',
-  //   component:ColegiosPage
-  // },
   {
     path:'listar-colegios',
     component:ColegiosPage

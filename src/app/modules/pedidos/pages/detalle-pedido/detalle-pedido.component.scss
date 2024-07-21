@@ -1,0 +1,27 @@
+.table{
+    width: 100%;
+}
+.center-img{
+    display: flex; 
+    justify-content:center;
+}
+
+.table tbody tr td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+ion-card{
+    box-shadow: none !important;
+}
+//estilo de enlace para etiqueta h3
+.link-like {
+    color: #007bff; /* Color similar al de un enlace */
+    text-decoration: underline; /* Subrayado */
+    cursor: pointer; /* Cursor de mano como en enlaces */
+  }
+  
+  .link-like:hover {
+    color: #0056b3; /* Color más oscuro al pasar el cursor */
+    text-decoration: none; /* Quitar subrayado al pasar el cursor */
+  }
+  
