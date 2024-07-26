@@ -70,7 +70,7 @@ export class CreateProductoPageComponent implements OnInit {
       const { nombre, precio_unitario, tipo, descripcion, medida, unidad_medida, id_categoria, id_proveedor } = this.formProducto.getRawValue();
       this._uploads.uploadImageCloudinary(this.selectedFile).then((imagen: any) => {
         this._productos.createProducto({
-          nombre, precio_unitario, tipo, descripcion, medida, unidad_medida, id_categoria, imagen: imagen.url_image
+          nombre, precio_unitario, tipo, descripcion, medida, unidad_medida, id_categoria, imagen: imagen.url_image,estado:'activo'
         }).then((producto: any) => {
           this._productos.asignarProducto(producto.id_producto, id_proveedor).then((resp: any) => {
             console.log(resp.mensaje);
