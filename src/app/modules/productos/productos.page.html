@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <ion-content [fullscreen]="true" color="light">
   <ion-grid>
     <ion-row>
@@ -9,10 +8,11 @@
             <div class="header-card">
               <ion-card-title>Productos</ion-card-title>
               <div>
-                <ion-searchbar placeholder="Buscar Productos" (ionInput)="buscar($event)" [debounce]="200"></ion-searchbar>
+                <ion-searchbar placeholder="Buscar Productos" (ionInput)="buscar($event)"
+                  [debounce]="200"></ion-searchbar>
               </div>
-              
-              <ion-segment 	scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
+
+              <ion-segment scrollable="true" value="todos" (ionChange)="filtrarporestado($event)">
                 <ion-segment-button value="todos">
                   <ion-label>Todos</ion-label>
                 </ion-segment-button>
@@ -27,12 +27,18 @@
                 <ion-item>
                   <ion-select value="todos" (ionChange)="filtrarPorProveedor($event)">
                     <ion-select-option value="todos">Todos los proveedores</ion-select-option>
-                    <ion-select-option *ngFor="let proveedor of listaProveedores" [value]="proveedor.id_proveedor">{{proveedor.razon_social}}</ion-select-option>
+                    <ion-select-option *ngFor="let proveedor of listaProveedores"
+                      [value]="proveedor.id_proveedor">{{proveedor.razon_social}}</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>
             </div>
-          
+            <div>
+              <ion-button (click)="clasificarproductos()">
+                depurar productos
+              </ion-button>
+            </div>
+
           </ion-card-header>
           <ion-card-content>
             <div class="responsive">
@@ -43,7 +49,7 @@
                     <th>
                       <div style="width: 100%; display: flex; justify-content: flex-start;">
                         <span style="margin-left: 30px;">Producto</span>
-                     </div>
+                      </div>
                     </th>
                     <th class="ion-text-center">P.U</th>
                     <th class="ion-text-center">Medida</th>
@@ -62,9 +68,10 @@
                         </ion-thumbnail>
                         <ion-label>
                           <h3>{{producto.nombre |uppercase}}</h3>
-                          <ion-button (click)="openModalUpdateImage(producto.id_producto,producto.imagen)" color="primary" size="small" fill="clear">
-                           cambiar imagen
-                           <ion-icon slot="start" name="image-outline"></ion-icon>
+                          <ion-button (click)="openModalUpdateImage(producto.id_producto,producto.imagen)"
+                            color="primary" size="small" fill="clear">
+                            cambiar imagen
+                            <ion-icon slot="start" name="image-outline"></ion-icon>
                           </ion-button>
                         </ion-label>
                       </ion-item>
@@ -72,29 +79,34 @@
                     <td class="ion-text-center">{{producto.precio_unitario}} Bs</td>
                     <td class="ion-text-center">{{producto.medida}} {{producto.unidad_medida}}</td>
                     <td class="ion-text-center">
-                      <ion-badge [color]="producto.estado==='activo'?'success':'warning'" mode="ios">{{producto.estado==='activo'?'Activo':'Inactivo'}}</ion-badge>
+                      <ion-badge [color]="producto.estado==='activo'?'success':'warning'"
+                        mode="ios">{{producto.estado==='activo'?'Activo':'Inactivo'}}</ion-badge>
                     </td>
                     <td class="ion-text-center">
                       <ion-chip (click)="detalle_proveedor(producto.id_proveedor)">
                         <ion-avatar>
-                          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                          <img alt="Silhouette of a person's head"
+                            src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                         </ion-avatar>
                         <ion-label>
                           <small>{{producto.razon_social}}</small>
                         </ion-label>
-                      </ion-chip>                    
+                      </ion-chip>
                     </td>
                     <td>
                       <div class="content-center">
-                        <ion-button  color="primary" fill="clear" title="Modificar Producto" (click)="updateForm(producto.id_producto)">
+                        <ion-button color="primary" fill="clear" title="Modificar Producto"
+                          (click)="updateForm(producto.id_producto)">
                           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                         </ion-button>
                         <!-- boton eliminar (eliminado logico) -->
-                        <ion-button *ngIf="producto.estado==='activo'" (click)="AlertConfirm(producto.id_producto,'inactivo')"  color="danger" fill="clear">
+                        <ion-button *ngIf="producto.estado==='activo'"
+                          (click)="AlertConfirm(producto.id_producto,'inactivo')" color="danger" fill="clear">
                           <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
                         </ion-button>
                         <!-- boton reestablecer -->
-                        <ion-button *ngIf="producto.estado==='inactivo'" (click)="AlertConfirm(producto.id_producto,'activo')"  color="success" fill="clear">
+                        <ion-button *ngIf="producto.estado==='inactivo'"
+                          (click)="AlertConfirm(producto.id_producto,'activo')" color="success" fill="clear">
                           <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
                         </ion-button>
                         <ion-button (click)="opendetalles(producto.id_producto)" color="tertiary" fill="clear">

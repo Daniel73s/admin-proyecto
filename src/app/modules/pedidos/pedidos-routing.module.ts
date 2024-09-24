@@ -9,7 +9,7 @@ const routes: Routes = [
     component:PedidosComponent
   },
   {
-    path:'detalle-pedido',
+    path:'detalle-pedido/:id_pedido',
     component:DetallePedidoComponent
   }
 ];

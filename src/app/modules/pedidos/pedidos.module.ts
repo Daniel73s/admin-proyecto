@@ -6,6 +6,7 @@ import { PedidosComponent } from './pedidos.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { IonicModule } from '@ionic/angular';
 import { DetallePedidoComponent } from './pages/detalle-pedido/detalle-pedido.component';
+import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DetallePedidoComponent } from './pages/detalle-pedido/detalle-pedido.co
     CommonModule,
     PedidosRoutingModule,
     ComponentsModule,
-    IonicModule
+    IonicModule,
+    PipesModule
   ]
 })
 export class PedidosModule { }

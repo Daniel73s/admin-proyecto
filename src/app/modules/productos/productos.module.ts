@@ -13,6 +13,7 @@ import { DetalleProductoPageComponent } from './pages/detalle-producto-page/deta
 import { PipesModule } from 'src/app/helpers/pipes/pipes.module';
 import { CreateProductoPageComponent } from './pages/create-producto-page/create-producto-page.component';
 import { ModImageComponent } from './modals/mod-image/mod-image.component';
+import { DepurarProductosComponent } from './modals/depurar-productos/depurar-productos.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { ModImageComponent } from './modals/mod-image/mod-image.component';
     ModificarProductoPageComponent,
     DetalleProductoPageComponent,
     CreateProductoPageComponent,
-    ModImageComponent]
+    ModImageComponent,
+    DepurarProductosComponent]
 })
-export class ProductosPageModule {}
+export class ProductosPageModule { }

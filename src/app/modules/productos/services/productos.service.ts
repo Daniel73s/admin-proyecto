@@ -45,4 +45,10 @@ export class ProductosService {
   public asignarProducto(id_producto:string,id_proveedor:string) {
     return this.http.post(`${this.url}/asignar`,{id_producto,id_proveedor}).toPromise();
   }
+
+  //depurar productos
+  public depurarProductos(min: number, max: number) {
+    return this.http.patch(`${this.url}/depurar`, {min,max}).toPromise();
+  }
+
 }

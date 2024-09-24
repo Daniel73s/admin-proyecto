@@ -5,6 +5,7 @@ import { Producto } from 'src/app/helpers/interfaces/producto.interface';
 import { ProductosService } from './services/productos.service';
 import { ProveedoresService } from '../proveedores/services/proveedores.service';
 import { ModImageComponent } from './modals/mod-image/mod-image.component';
+import { DepurarProductosComponent } from './modals/depurar-productos/depurar-productos.component';
 
 
 @Component({
@@ -158,5 +159,17 @@ export class ProductosPage {
     const nameimage=arrimagen[arrimagen.length-1];
     const [id]=nameimage.split('.');
     return id
+  }
+
+
+  public async clasificarproductos(){
+    const modal=await this.modalCtrl.create({
+      component:DepurarProductosComponent
+    })
+    await modal.present();
+    const modaldata = await modal.onDidDismiss();
+    if (modaldata.data=="success") {
+      this.getProductos();
+    }
   }
 }

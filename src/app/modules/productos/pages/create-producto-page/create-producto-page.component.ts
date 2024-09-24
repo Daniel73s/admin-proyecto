@@ -40,7 +40,7 @@ export class CreateProductoPageComponent implements OnInit {
   public formInit() {
     this.formProducto = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
-      precio_unitario: ['', [Validators.required, Validators.min(1), Validators.max(2)]],
+      precio_unitario: ['', [Validators.required, Validators.min(1)]],
       tipo: ['', [Validators.required]],
       descripcion: ['', [Validators.required, Validators.maxLength(250)]],
       medida: ['', [Validators.required]],

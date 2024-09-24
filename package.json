@@ -31,7 +31,10 @@
     "@maskito/core": "^1.1.1",
     "animate.css": "^4.1.1",
     "ionicons": "^7.0.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "mapbox-gl": "^2.15.0",
+    "qrious": "^4.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

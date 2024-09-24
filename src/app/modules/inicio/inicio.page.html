@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true" color="light">
+<ion-content [fullscreen]="true" color="light" *ngIf="datos.length>0">
   <ion-header class="ion-no-border">
     <ion-toolbar color="light">
       <ion-title>Inicio</ion-title>
@@ -15,7 +15,7 @@
             <ion-card-subtitle>Administradores</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <h1>2</h1>
+            <h1>{{datos[0].total}}</h1>
             <!-- <span>Registrados</span> -->
           </ion-card-content>
         </ion-card>
@@ -27,7 +27,7 @@
             <ion-card-subtitle>Colegios</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <h1>36</h1>
+            <h1>{{datos[1].total}}</h1>
             <!-- <span>Registrados</span> -->
           </ion-card-content>
         </ion-card>
@@ -39,7 +39,7 @@
             <ion-card-subtitle>Proveedores</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <h1>15</h1>
+            <h1>{{datos[3].total}}</h1>
             <!-- <span>Registrados</span> -->
           </ion-card-content>
         </ion-card>
@@ -51,7 +51,7 @@
             <ion-card-subtitle>Productos</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <h1>36</h1>
+            <h1>{{datos[2].total}}</h1>
           </ion-card-content>
         </ion-card>
       </ion-col>

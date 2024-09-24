@@ -5,6 +5,7 @@ import { ReportesRoutingModule } from './reportes-routing.module';
 import { ReportesComponent } from './reportes.component';
 import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ReportesComponent],
@@ -12,7 +13,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     ReportesRoutingModule,
     IonicModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule
   ]
 })
 export class ReportesModule { }

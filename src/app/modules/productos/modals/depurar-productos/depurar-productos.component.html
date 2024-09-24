@@ -1,0 +1,32 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Depurar productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-icon slot="start" name="warning-outline"></ion-icon>
+          <ion-label>
+            <ion-note>Depurar producto segun su precio</ion-note>
+            <p>entre {{min || 0}}bs a {{max || 0}}bs</p>
+          </ion-label>
+          <ion-button slot="end" (click)="actualizar_productos()">
+            actualizar
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Rango maximo" value="5" (ionInput)="cambiarRango($event)" placeholder="Ingrese otro rango"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="12">
+        <ion-range #rango (ionChange)="rangos($event)" [value]="max" aria-label="Custom range" mode="md" [min]="1" [max]="rangomax" [dualKnobs]="true" [pin]="true" [ticks]="true"
+          [snaps]="true"></ion-range>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
