@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProductosService {
 
-  private url: string = 'http://localhost:8080/api/productos';
+  private url: string = 'https://server-ogdr.onrender.com/api/productos';
 
   constructor(private http: HttpClient) { }
 

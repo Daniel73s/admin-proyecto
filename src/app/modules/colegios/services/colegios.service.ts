@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ColegiosService {
   // private url = "https://server-taller.onrender.com/api/colegios";
-  private url = "http://localhost:8080/api/colegios"
+  private url = "https://server-ogdr.onrender.com/api/colegios"
   constructor(private http: HttpClient) { }
 
   //obteniendo todos los colegios 

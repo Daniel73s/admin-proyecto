@@ -52,8 +52,6 @@ export class ModificarProductoPageComponent implements OnInit {
   private getCategorias() {
     this._categoriasService.getCategoriasValidas().then((resp: any) => {
       this.categorias = resp;
-      console.log(this.categorias);
-
     });
   }
 

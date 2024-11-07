@@ -24,7 +24,6 @@ export class DepurarProductosComponent implements OnInit {
   }
 
   public actualizar_productos() {
-    console.log('se actualizara los productos de : ', this.min, " a ", this.max);
     this._productos.depurarProductos(Number(this.min), Number(this.max)).then((resp: any) => {
       this.mensaje(resp.mensaje,3000,"top");
       this.modalCtrl.dismiss("success");

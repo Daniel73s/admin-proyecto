@@ -87,13 +87,12 @@ export class ProductosPage {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+            
           }
         }, {
           text: "Aceptar",
           handler: () => {
             //Realizar la accion para cambiar de estado al proveedor
-            console.log(id, accion);
             this._Productos.updateEstadoProducto(id, accion).then((resp: any) => {
               this.mensaje(2000, resp.mensaje, 'checkmark-outline', 'top');
               this.getProductos();

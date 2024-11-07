@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CategoriaService {
-private url="http://localhost:8080/api/categorias";
+private url="https://server-ogdr.onrender.com/api/categorias";
   constructor(private http:HttpClient) { }
 
   public getCategorias(){

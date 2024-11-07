@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PedidosService {
-  private url: string = 'http://localhost:8080/api/pedidos'
+  private url: string = 'https://server-ogdr.onrender.com/api/pedidos'
   constructor(private http: HttpClient) { }
 
   public getAllPedidos() {

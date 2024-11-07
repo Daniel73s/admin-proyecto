@@ -21,8 +21,6 @@ export class DetallePedidoComponent {
 
   private getPedido(id_pedido: string) {
     this._pedidos.getPedidoById(id_pedido).then((resp: any) => {
-      console.log(resp);
-      
       this.pedido=resp;
     }).catch(e => {
       console.log(e);

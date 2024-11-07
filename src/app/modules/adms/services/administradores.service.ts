@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AdministradoresService {
-  private url: string = 'http://localhost:8080/api/administradores';
+  private url: string = 'https://server-ogdr.onrender.com/api/administradores';
 
   constructor(private http: HttpClient) { }
 

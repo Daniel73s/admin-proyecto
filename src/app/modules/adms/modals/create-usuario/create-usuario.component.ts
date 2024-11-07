@@ -21,8 +21,6 @@ export class CreateUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.formInit();
-    console.log('llego al modal este id ',this.id_admin);
-    
   }
 
   close() {
@@ -50,21 +48,16 @@ export class CreateUsuarioComponent implements OnInit {
   }
 
   public crearUsuario() {
-    // console.log(this.formuser.getRawValue());
-    // console.log(this.formuser.get('repeat_password')?.errors);
     const { usuario, password } = this.formuser.getRawValue();
     this._usuarios.createUserAdministrador(usuario, password).then((resp: any) => {
-      console.log('se enviara este id ',this.id_admin);
       this._administradores.agregarUserAdmin(resp.usuario, this.id_admin).then((resp: any) => {
         this.mensaje(resp.mensaje,2000,'top','checkmark-outline','dark');
         const estado='success';
         this.modalctrl.dismiss(estado);
       }).catch(e => {
-        console.log(e.message);
         this.mensaje('ocurrio un error inesperado intentelo nuevamente',2000,'top','warning-outline','danger');
       });
     }).catch(e =>{
-      console.log(e.message);
       this.mensaje('ocurrio un error inesperado intentelo nuevamente',2000,'top','warning-outline','danger');
     })
 

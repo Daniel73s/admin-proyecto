@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ReportesService {
-private url:string='http://localhost:8080/api/reportes'
+private url:string='https://server-ogdr.onrender.com/api/reportes'
   constructor(private http:HttpClient) { }
 
   public getInfoInicio(){

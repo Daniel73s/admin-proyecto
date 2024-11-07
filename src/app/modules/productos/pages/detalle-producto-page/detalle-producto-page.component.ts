@@ -21,7 +21,6 @@ public producto:any;
   }
   private getProducto(id:string){
     this._productos.detalleProducto(id).then((resp:any)=>{
-      console.log(resp);
       this.producto=resp
     });
   }

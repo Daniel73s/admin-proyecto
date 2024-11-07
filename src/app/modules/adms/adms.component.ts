@@ -51,12 +51,10 @@ export class AdmsComponent {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'aceptar',
           handler: () => {
-            console.log(usuario, estado);
             this._usuarios.updateEstadoUsuario(usuario, estado).then((resp: any) => {
               this.mensaje(resp.mensaje, 2000, 'top', 'checkmark-outline', 'dark');
             }).catch(e => console.log)

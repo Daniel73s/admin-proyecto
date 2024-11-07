@@ -16,7 +16,6 @@ export class InicioPage implements OnInit {
 
   public getinfoinicio() {
     this._reportes.getInfoInicio().then((resp: any) => {
-      console.log(resp);
       this.datos = resp;
     }).catch(e => {
       console.log(e.message);

@@ -86,7 +86,6 @@ export class ReportesComponent {
 
   private getColegios() {
     this._colegios.getColegios().then((resp: any) => {
-      console.log("estos son los colegios", resp);
       this.colegios = resp;
     }).catch(e => {
       console.log(e);
@@ -119,8 +118,6 @@ export class ReportesComponent {
             this.mensaje('no se encontraron registros', 'dark', 3000);
             return
           }
-          console.log(resp);
-
           this.reporte = resp;
         }).catch(e => {
           console.log(e);
@@ -128,8 +125,6 @@ export class ReportesComponent {
         })
     } else if (this.tiporeporte == 'fecha') {
       const fecha = this.fechaunica.toLocaleString().slice(0, 10);
-      console.log(this.fechaunica.toLocaleString(), 'esta es la fecha', new Date(this.fechaunica).toISOString());
-
       this._reportes.getPedidosProveedorByDate(this.idproveedor, fecha, this.estado_pedido)
         .then((resp: any) => {
           if (resp.length <= 0) {
@@ -144,18 +139,12 @@ export class ReportesComponent {
     } else if (this.tiporeporte == 'mensual') {
       const anio = new Date(this.mes_anio).getFullYear();
       const mes = new Date(this.mes_anio).getMonth() + 1;
-      console.log(this.mes_anio);
-      console.log(mes, anio, this.idproveedor, this.estado_pedido);
-
-
       this._reportes.getPedidosProveedorByMes(this.idproveedor, anio, mes, this.estado_pedido)
         .then((resp: any) => {
           if (resp.length <= 0) {
             this.mensaje('No se encontro ningun registro ', 'danger', 3000);
             return
           }
-          console.log(resp);
-
           this.reporte = resp;
           // this._pdfGenerator.pedidosProveedorMesPDF(resp, this.proveedor, this.getMonthName(mes));
         }).catch((e: any) => {
@@ -231,7 +220,6 @@ export class ReportesComponent {
     const anio = date.getFullYear();
     if (this.estado_pedido && this.idcolegio && this.mes_anio) {
       this._reportes.getPedidosColegioByMes(this.idcolegio, anio, mes, this.estado_pedido).then((resp: any) => {
-        console.log(resp);
         this.reportecolegio=resp;
       }).catch(e => {
         console.log(e);

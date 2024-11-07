@@ -73,7 +73,7 @@ export class CreateProductoPageComponent implements OnInit {
           nombre, precio_unitario, tipo, descripcion, medida, unidad_medida, id_categoria, imagen: imagen.url_image,estado:'activo'
         }).then((producto: any) => {
           this._productos.asignarProducto(producto.id_producto, id_proveedor).then((resp: any) => {
-            console.log(resp.mensaje);
+            
             this.mensaje(2000, resp.mensaje, 'checkmark-outline', 'top');
             this.formProducto.reset();
             this.loading.dismiss();

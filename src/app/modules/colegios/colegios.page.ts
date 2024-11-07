@@ -67,7 +67,7 @@ export class ColegiosPage {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+           
             this.mensaje(2000, 'Se cancelo la accion', 'close-outline', 'top');
           }
         }, {
@@ -154,12 +154,12 @@ export class ColegiosPage {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+            
           }
         }, {
           text: 'Aceptar',
           handler: () => {
-            console.log(usuario, estado);
+            
             this._usuarios.updateEstadoUsuario(usuario,estado).then((resp:any)=>{
               this.mensaje(2000,resp.mensaje,'checkmark-outline','top');
               this.colegios();

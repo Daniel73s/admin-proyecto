@@ -49,8 +49,6 @@ export class CreateUsuarioComponent  implements OnInit {
   }
 
   public crearUsuario() {
-    console.log(this.formuser.getRawValue());
-    
     const { usuario, password } = this.formuser.getRawValue();
     this._usuarios.createUserColegio(usuario, password).then((resp: any) => {
       this._colegios.agregarUsuario(this.id_colegio,resp.usuario).then((resp: any) => {

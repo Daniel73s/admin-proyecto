@@ -27,7 +27,6 @@ export class PedidosComponent {
   }
 
   public filtarPorEstado(e: any) {
-    console.log(e.detail.value);
     this.estado = e.detail.value;
   }
 
@@ -36,7 +35,6 @@ export class PedidosComponent {
   }
 
   public copiar(id:string){
-      console.log(id);
       navigator.clipboard.writeText(id).then(()=>{
         this.mensaje("se copio correctamente",500,"top");
       }).catch(()=>{

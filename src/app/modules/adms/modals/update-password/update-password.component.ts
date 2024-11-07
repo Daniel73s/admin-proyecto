@@ -17,8 +17,6 @@ export class UpdatePasswordComponent implements OnInit {
     private toastCtrl: ToastController) { }
   public formpass!: FormGroup;
   ngOnInit() {
-    console.log('desde el modal', this.usuario);
-
     this.formInit();
   }
 
@@ -48,14 +46,11 @@ export class UpdatePasswordComponent implements OnInit {
   public updatePass() {
     const { pass } = this.formpass.getRawValue();
     if (this.formpass.valid) {
-      console.log(pass, this.usuario);
       this._usuarios.updatePasswordUsuario({ pass, usuario: this.usuario }).then((resp: any) => {
         this.mensaje(resp.mensaje,2000,'checkmark-outline','top','dark');
         this.modalCtrl.dismiss('success');
       }).catch(e => {
-        console.log(e.message);
         this.mensaje('Error al actualizar, intentelo mas tarde',2000,'warning-outline','top','danger');
-       
       });
     } else {
       this.mensaje('El formulario es invalido',2000,'warning-outline','top','danger');

@@ -56,7 +56,7 @@ export class CategoriasComponent{
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+       
           }
         }, {
           text: 'Aceptar',

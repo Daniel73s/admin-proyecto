@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProveedoresService {
 
-  private url: string = 'http://localhost:8080/api/proveedores';
+  private url: string = 'https://server-ogdr.onrender.com/api/proveedores';
   constructor(private http: HttpClient) { }
 
   //obteniendo todos los proveedores

@@ -21,8 +21,6 @@ export class CreateUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.formInit();
-    console.log(this.id_proveedor, 'llego');
-
   }
 
   close() {

@@ -71,7 +71,7 @@ export class ProveedoresPage {
           text: "Aceptar",
           handler: () => {
             //Realizar la accion para cambiar de estado al proveedor
-            console.log(id, accion);
+            
             this._Proveedores.updateEstado(id, accion).then((resp: any) => {
               this.mensaje(2000, resp.mensaje, 'checkmark-outline', "top");
               this.solicitarProveedores();
