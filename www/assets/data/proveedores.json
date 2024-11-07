@@ -1,0 +1,46 @@
+{
+    "proveedores":[
+        {
+            "id": "1",
+            "razonSocial": "proveedor a",
+            "nit": 1234567890,
+            "limite": 10000,
+            "cs": "valido",
+            "telefonoFijo": "(4) 66-98541",
+            "celular": "+(591) 65896521",
+            "zona": "Zona A",
+            "calle": "Calle Principal",
+            "numero": "123",
+            "estado":"activo"
+          },
+          {
+            "id": "2",
+            "razonSocial": "proveedor b",
+            "limite": 5000,
+            "cs": "pendiente",
+            "celular": "+(591) 78596235",
+            "zona": "Zona B",
+            "estado":"activo"
+          },
+          {
+            "id": "3",
+            "razonSocial": "proveedor c",
+            "limite": 8000,
+            "cs": "valido",
+            "celular": "+(591) 66369854",
+            "zona": "Zona C",
+            "calle": "Calle Secundaria",
+            "numero": "45",
+            "estado":"inactivo"
+          },
+          {
+            "id": "4",
+            "razonSocial": "proveedor d",
+            "limite": 7000,
+            "cs": "valido",
+            "celular": "+(591) 78545996",
+            "zona": "Zona D",
+            "estado":"activo"
+          }       
+    ]
+}
